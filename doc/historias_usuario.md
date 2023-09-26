@@ -3,9 +3,7 @@
 ## Periodista deportivo
 ![Periodista NBA](/doc/images/periodista.png)
 
-Como periodista deportivo especializado en baloncesto, quiero una herramienta en línea que me permita comparar las estadísticas de los jugadores de baloncesto de diferentes épocas. También me gustaría incluir la posibilidad de introducir un nombre de un jugador de baloncesto específico, y que la aplicación me ofreciese una lista de jugadores similares en cuanto a estadísticas. Esto me ayudará a crear informes más precisos y atractivos para mis lectores y seguidores.
-
-Las estadísticas que más me interesan son: partidos jugados, minutos jugados, puntos, rebotes ofensivos, rebotes defensivos, asistencias, robos, tapones, pérdidas, porcentaje de tiro de dos puntos, porcentaje de tiro de tres puntos y porcentaje de tiro libre.
+Como periodista deportivo especializado en baloncesto, quiero una herramienta en línea que me permita comparar las estadísticas de los jugadores de baloncesto de diferentes épocas. Me gustaría poder introducir un nombre de un jugador de baloncesto específico, y que la aplicación me ofreciese una lista de jugadores similares en cuanto a estadísticas. Esto me ayudará a crear informes más precisos y atractivos para mis lectores y seguidores.
 
 ## Fanático NBA
 ![Fan NBA](/doc/images/fan.png)

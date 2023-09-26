@@ -1,13 +1,13 @@
 # Milestones
 
-- ### Milestone 0: Comprensión y creación del modelo del problema.
+- ### M0: Comprensión y diseño del modelo del problema.
 
-Identificación y priorización de las historias de usuario necesarias para el desarrollo del proyecto.
+Comprender las historias de usuario para familiriazarse con el problema a resolver.
 
-PMV: documentación inicial del problema
+PMV: Código modularizado del problema.
 
-- ### Milestone 1: Investigación de las fuentes de datos disponibles
+- ### M1: Implementación y estudio de las fuentes de datos
 
-Análisis de todas las fuentes de datos disponibles y evaluación de su calidad y confiabilidad.
+Implementar el código necesario para obtener los datos de las fuentes de datos seleccionadas.
 
-PMV: base de datos con la que se trabajará durante el proyecto.
+PMV: Código que resuelva la obtención de datos desde las fuente de datos seleccionadas.
