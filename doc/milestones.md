@@ -1,13 +1,25 @@
 # Milestones
 
-- ### M0: Comprensión y diseño del modelo del problema.
+- ### M0: Comprensión del problema.
 
-Comprender las historias de usuario para familiriazarse con el problema a resolver.
+Comprender las historias de usuario para familiarizarse con el problema a resolver.
 
-PMV: Código modularizado del problema.
+- PMV: Código modularizado del problema.
 
-- ### M1: Implementación y estudio de las fuentes de datos
+- Validez: Será válido cuando lo apruebe el product owner.
 
-Implementar el código necesario para obtener los datos de las fuentes de datos seleccionadas.
+- ### M1: Implementación de los filtros sobre la base de datos
 
-PMV: Código que resuelva la obtención de datos desde las fuente de datos seleccionadas.
+Implementar el código necesario que permita filtrar los datos según un campo concreto.
+
+- PMV: Código capaz de filtrar datos desde las fuente de datos seleccionadas.
+
+- Validez: Será válido cuando el código supere los tests correspondientes.
+
+### M2: Implementación del algoritmo de normalización de las estadísticas
+
+Implementar el algoritmo que permita a los usuarios comparar a jugadores de distintas épocas, con las estadísticas ya normalizadas.
+
+- PMV: Código que implemente el algoritmo de normalización
+
+- Validez: Será viable cuando el código supere los tests correspondientes.
