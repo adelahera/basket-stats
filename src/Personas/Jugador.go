@@ -3,7 +3,8 @@ package Personas
 type Jugador struct {
 	nombre          string
 	apellidos       string
-	equipos         []string
+	equipo          string
+	temporada       string
 	partidosJugados int
 	puntos          int
 	asistencias     int
@@ -13,13 +14,14 @@ type Jugador struct {
 	perdidas        int
 }
 
-func NuevoJugador(nombre string, apellidos string, equipos []string,
-partidosJugados int, puntos int, asistencias int, rebotes int, tapones int,
-robos int, perdidas int) Jugador {
+func NuevoJugador(nombre string, apellidos string, equipo string, temporada string,
+	partidosJugados int, puntos int, asistencias int, rebotes int, tapones int,
+	robos int, perdidas int) Jugador {
 	jugador := Jugador{
 		nombre:          nombre,
 		apellidos:       apellidos,
-		equipos:         equipos,
+		equipo:          equipo,
+		temporada:       temporada,
 		partidosJugados: partidosJugados,
 		puntos:          puntos,
 		asistencias:     asistencias,
