@@ -4,7 +4,7 @@ type Jugador struct {
 	nombre          string
 	apellidos       string
 	equipo          string
-	temporada       string
+	temporada       int
 	partidosJugados int
 	puntos          int
 	asistencias     int
@@ -14,7 +14,7 @@ type Jugador struct {
 	perdidas        int
 }
 
-func NuevoJugador(nombre string, apellidos string, equipo string, temporada string,
+func NuevoJugador(nombre string, apellidos string, equipo string, temporada int,
 	partidosJugados int, puntos int, asistencias int, rebotes int, tapones int,
 	robos int, perdidas int) Jugador {
 	jugador := Jugador{
