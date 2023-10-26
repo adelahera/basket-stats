@@ -1,8 +1,7 @@
 package main
 
 type Jugador struct {
-	nombre          string
-	apellidos       string
+	nombreApellidos	string
 	equipo          string
 	temporada       int
 	partidosJugados int
@@ -14,12 +13,11 @@ type Jugador struct {
 	perdidas        int
 }
 
-func NuevoJugador(nombre string, apellidos string, equipo string, temporada int,
+func NuevoJugador(nombreApellidos string, equipo string, temporada int,
 	partidosJugados int, puntos int, asistencias int, rebotes int, tapones int,
 	robos int, perdidas int) Jugador {
 	jugador := Jugador{
-		nombre:          nombre,
-		apellidos:       apellidos,
+		nombreApellidos: nombreApellidos,
 		equipo:          equipo,
 		temporada:       temporada,
 		partidosJugados: partidosJugados,
