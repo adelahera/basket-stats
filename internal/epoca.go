@@ -1,4 +1,4 @@
-package Etapa
+package main
 
 import (
 	Jugador "src/Personas"
