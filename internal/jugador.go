@@ -1,4 +1,4 @@
-package Personas
+package main
 
 type Jugador struct {
 	nombre          string

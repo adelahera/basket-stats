@@ -1,21 +1,18 @@
 package main
 
-import (
-	Jugador "src/Personas"
-	"time"
-)
+
 
 type Etapa struct {
-	FechaInicio time.Time
-	FechaFinal  time.Time
-	Jugadores   []Jugador.Jugador
+	fechaInicio int
+	fechaFinal  int
+	jugadores   []Jugador
 }
 
-func NuevaEtapa(fechaInicio time.Time, fechaFinal time.Time, jugadores []Jugador.Jugador) Etapa {
+func NuevaEtapa(fechaInicio int, fechaFinal int, jugadores []Jugador) Etapa {
 	etapa := Etapa{
-		FechaInicio: fechaInicio,
-		FechaFinal:  fechaFinal,
-		Jugadores:   jugadores,
+		fechaInicio: fechaInicio,
+		fechaFinal:  fechaFinal,
+		jugadores:   jugadores,
 	}
 	return etapa
 }

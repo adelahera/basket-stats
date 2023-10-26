@@ -1,14 +1,13 @@
-package Estadisticas
+package main
 
-import e "src/Agrupacion"
 
 type Estadistica struct {
-	Etapas []e.Etapa
+	etapas []Etapa
 }
 
-func NuevaEstadistica(etapas []e.Etapa) Estadistica {
+func NuevaEstadistica(etapas []Etapa) Estadistica {
 	estadistica := Estadistica{
-		Etapas: etapas,
+		etapas: etapas,
 	}
 	return estadistica
 }
