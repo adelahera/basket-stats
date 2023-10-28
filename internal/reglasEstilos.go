@@ -4,7 +4,7 @@ type ReglaEstilo struct {
 	aplica      bool
 	anio        int
 	nombreRegla string
-	factor      []float64
+	factores      []float64
 }
 
 type ReglasEstilos struct {
