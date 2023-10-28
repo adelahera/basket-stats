@@ -1,18 +1,18 @@
 package main
 
-
-
-type Etapa struct {
+type Epoca struct {
 	fechaInicio int
 	fechaFinal  int
 	jugadores   []Jugador
+	reglas      ReglasEstilos
 }
 
-func NuevaEtapa(fechaInicio int, fechaFinal int, jugadores []Jugador) Etapa {
-	etapa := Etapa{
+func NuevaEpoca(fechaInicio int, fechaFinal int, jugadores []Jugador, reglas ReglasEstilos, normaliza bool) Epoca {
+	epoca := Epoca{
 		fechaInicio: fechaInicio,
 		fechaFinal:  fechaFinal,
 		jugadores:   jugadores,
+		reglas:      reglas,
 	}
-	return etapa
+	return epoca
 }

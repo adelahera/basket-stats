@@ -1,32 +1,23 @@
 package main
 
 type Jugador struct {
-	nombreApellidos	string
-	equipo          string
-	temporada       int
-	partidosJugados int
-	puntos          int
-	asistencias     int
-	rebotes         int
-	tapones         int
-	robos           int
-	perdidas        int
+	nombreApellidos      string
+	equipo               string
+	temporada            int
+	partidosJugados      int
+	propiedadesTemporada PropiedadesTemporada
 }
 
 func NuevoJugador(nombreApellidos string, equipo string, temporada int,
-	partidosJugados int, puntos int, asistencias int, rebotes int, tapones int,
-	robos int, perdidas int) Jugador {
+	partidosJugados int, propiedadesTemporada PropiedadesTemporada) Jugador {
 	jugador := Jugador{
-		nombreApellidos: nombreApellidos,
-		equipo:          equipo,
-		temporada:       temporada,
-		partidosJugados: partidosJugados,
-		puntos:          puntos,
-		asistencias:     asistencias,
-		rebotes:         rebotes,
-		tapones:         tapones,
-		robos:           robos,
-		perdidas:        perdidas,
+		nombreApellidos:      nombreApellidos,
+		equipo:               equipo,
+		temporada:            temporada,
+		partidosJugados:      partidosJugados,
+		propiedadesTemporada: propiedadesTemporada,
 	}
 	return jugador
 }
+
+

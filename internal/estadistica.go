@@ -1,13 +1,16 @@
 package main
 
-
 type Estadistica struct {
-	etapas []Etapa
+	epocas []Epoca
 }
 
-func NuevaEstadistica(etapas []Etapa) Estadistica {
+func NuevaEstadistica(epocas []Epoca) Estadistica {
 	estadistica := Estadistica{
-		etapas: etapas,
+		epocas: epocas,
 	}
 	return estadistica
+}
+
+func normalizaEpoca(epoca Epoca) Epoca {
+	return NuevaEpoca(epoca.fechaInicio, epoca.fechaFinal, epoca.jugadores, epoca.reglas, true)
 }
