@@ -5,9 +5,10 @@ type Estadistica struct {
 	factores []float64
 }
 
-func NuevaEstadistica(epocas []Epoca) Estadistica {
+func NuevaEstadistica(epocas []Epoca, factores []float64) Estadistica {
 	estadistica := Estadistica{
-		epocas: epocas,
+		epocas:   epocas,
+		factores: factores,
 	}
 	return estadistica
 }
