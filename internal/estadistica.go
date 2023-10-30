@@ -1,7 +1,8 @@
 package main
 
 type Estadistica struct {
-	epocas []Epoca
+	epocas   []Epoca
+	factores []float64
 }
 
 func NuevaEstadistica(epocas []Epoca) Estadistica {
@@ -12,5 +13,5 @@ func NuevaEstadistica(epocas []Epoca) Estadistica {
 }
 
 func normalizaEpoca(epoca Epoca) Epoca {
-	return NuevaEpoca(epoca.fechaInicio, epoca.fechaFinal, epoca.jugadores, epoca.reglas, true)
+	return NuevaEpoca(epoca.fechaInicio, epoca.fechaFinal, epoca.jugadores)
 }

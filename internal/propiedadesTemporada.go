@@ -1,23 +1,28 @@
 package main
 
 type PropiedadesTemporada struct {
-	puntos      int
-	asistencias int
-	rebotes     int
-	tapones     int
-	robos       int
-	perdidas    int
+	equipo          string
+	temporada       int
+	partidosJugados int
+	puntos          int
+	asistencias     int
+	rebotes         int
+	tapones         int
+	robos           int
+	perdidas        int
 }
 
-func propiedadesTemporada(puntos int, asistencias int, rebotes int, tapones int, robos int, perdidas int) PropiedadesTemporada {
+func propiedadesTemporada(equipo string, temporada int, partidosJugados int, puntos int, asistencias int, rebotes int, tapones int, robos int, perdidas int) PropiedadesTemporada {
 	propiedadesTemporada := PropiedadesTemporada{
-		puntos:      puntos,
-		asistencias: asistencias,
-		rebotes:     rebotes,
-		tapones:     tapones,
-		robos:       robos,
-		perdidas:    perdidas,
+		equipo:          equipo,
+		temporada:       temporada,
+		partidosJugados: partidosJugados,
+		puntos:          puntos,
+		asistencias:     asistencias,
+		rebotes:         rebotes,
+		tapones:         tapones,
+		robos:           robos,
+		perdidas:        perdidas,
 	}
 	return propiedadesTemporada
 }
-
