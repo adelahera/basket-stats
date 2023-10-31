@@ -1,6 +1,6 @@
 package main
 
-type Estadistica struct {
+type ComparacionEstadistica struct {
 	epocas   []Epoca
 	factores []float64
 }
