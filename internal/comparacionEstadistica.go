@@ -1,6 +1,6 @@
 package main
 
 type ComparacionEstadistica struct {
-	epocas   []Epoca
+	epocas   map[int]Epoca
 	factores []float64
 }

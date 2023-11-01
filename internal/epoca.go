@@ -1,9 +1,7 @@
 package main
 
 type Epoca struct {
-	idEpoca     int
-	fechaInicio string
-	fechaFin    string
-	estadisticasJugadores   []EstadisticasJugador
+	fechaInicio           string
+	fechaFin              string
+	estadisticasJugadores map[int]EstadisticasJugador
 }
-

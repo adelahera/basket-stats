@@ -1,8 +1,7 @@
 package main
 
 type EstadisticasJugador struct {
-	idEstadisticaJugador int
-	perfilBásicoJugador  PerfilBasicoJugador
+	perfilBasicoJugador  PerfilBasicoJugador
 	partidosJugados      int
 	puntos               int
 	equipo               string
