@@ -1,2 +1,2 @@
 lenguaje: Go
-entidad: src/Estadistica/Estadistica.go
+entidad: internal/comparacionEstadistica.go
