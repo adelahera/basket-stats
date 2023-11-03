@@ -1,2 +1,5 @@
 lenguaje: Go
 entidad: internal/comparacionEstadistica.go
+automatizar:
+  fichero: taskfile.yaml
+  orden: task
