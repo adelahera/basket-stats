@@ -1,0 +1,32 @@
+version: '3'
+
+tasks:
+
+  build:
+    label: "Construyendo el proyecto"
+    desc: "Esta tarea construye el proyecto"
+    cmds:
+      - go build -o comparacionEstadistica ./internal/
+  run:
+    label: "Ejecutando el proyecto"
+    desc: "Esta tarea ejecuta el proyecto"
+    cmds:
+      - go run ./internal/
+  
+  install-deps:
+    label: "Instalando dependencias"
+    desc: "Esta tarea instala las dependencias del proyecto"
+    cmds:
+      - go mod download
+
+  update-deps:
+    label: "Actualizando dependencias"
+    desc: "Esta tarea actualiza las dependencias del proyecto"
+    cmds:
+      - go get
+
+  check:
+    label: "Comprobando sintaxis"
+    desc: "Esta tarea comprueba la sintaxis del proyecto"
+    cmds:
+      - test -z $(gofmt -l ./internal/)
