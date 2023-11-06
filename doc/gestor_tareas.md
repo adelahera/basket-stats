@@ -1,6 +1,18 @@
 ## Gestor de tareas
 
-En cuanto al task runner, sabemos que hay un montón de opciones diferentes. Voy a describir algunas de las más comunes, y luego, explicar el por qué de mi elección.
+En cuanto al task runner, sabemos que hay un montón de opciones diferentes. Primeramente, describiré los criterios utilizados para la elección. A continuación se describirán algunos de los más comunes, y luego, explicar el por qué de mi elección.
+
+### Criterios
+
+* **Integración con otras herramientas:** como ya sabemos, nuestro proyecto va a ir de la mano de Git, así que vendría muy bien elegir un task runner que se integre bien con Git.
+
+* **Comunidad y soporte:** todavía considero que tengo mucho que aprender y mejorar en lo que respecta al mundo de los task runners, por lo que, para empezar, el task runner elegido debe tener una gran comunidad activa, con suficiente documentación y recursos para aprender.
+
+* **Facilidad de uso:** por el mismo motivo que antes, al considerarme primerizo en este tema, el task runner elegido debe ser sencillo, intuitivo y fácil de configurar.
+
+* **Funcionalidad y características:** evidentemente, el task runner debe tener una serie de características que me permitan desarrollar el proyecto, no todo va a basarse en lo fácil que es de usar o no. Deberá ser capaz de, como mínimo, definir tareas a automatizar.
+
+* **Compatibilidad entre sistemas:** yo mismo trabajo en dos máquinas diferentes, y no tengo el mismo SO en cada una de ellas, así que el task runner debe ser compatible con múltiples SOs para ejecutar tareas sin problemas en ambas máquinas.
 
 ### Make
 
@@ -38,4 +50,4 @@ Las ventajas que tiene Task son:
 
 ### Decisión
 
-Por todos los motivos explicados anteriormente, el gestor de tareas a utilizar en mi proyecto, va a ser **TASK**
+Por todos los motivos explicados anteriormente y por su adecuación a los criterios descritos, el gestor de tareas a utilizar en mi proyecto, va a ser **TASK**
