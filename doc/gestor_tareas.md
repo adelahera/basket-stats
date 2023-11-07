@@ -4,15 +4,11 @@ En cuanto al task runner, sabemos que hay un montón de opciones diferentes. Pri
 
 ### Criterios
 
-* **Integración con otras herramientas:** como ya sabemos, nuestro proyecto va a ir de la mano de Git, así que vendría muy bien elegir un task runner que se integre bien con Git.
+* **Rendimiento:** es importante considerar el rendimiento del task runner, es decir, la velocidad y eficiencia con la que ejecuta las tareas. Esto se puede evaluar mediante pruebas de rendimiento y comparando los tiempos de ejecución de las tareas en diferentes runners.
 
-* **Comunidad y soporte:** todavía considero que tengo mucho que aprender y mejorar en lo que respecta al mundo de los task runners, por lo que, para empezar, el task runner elegido debe tener una gran comunidad activa, con suficiente documentación y recursos para aprender.
+* **Compatibilidad entre sistemas:** yo mismo trabajo en dos máquinas diferentes, y no tengo el mismo SO en cada una de ellas, así que el task runner debe ser compatible con múltiples SOs para ejecutar tareas sin problemas en ambas máquinas. 
 
-* **Facilidad de uso:** por el mismo motivo que antes, al considerarme primerizo en este tema, el task runner elegido debe ser sencillo, intuitivo y fácil de configurar.
-
-* **Funcionalidad y características:** evidentemente, el task runner debe tener una serie de características que me permitan desarrollar el proyecto, no todo va a basarse en lo fácil que es de usar o no. Deberá ser capaz de, como mínimo, definir tareas a automatizar.
-
-* **Compatibilidad entre sistemas:** yo mismo trabajo en dos máquinas diferentes, y no tengo el mismo SO en cada una de ellas, así que el task runner debe ser compatible con múltiples SOs para ejecutar tareas sin problemas en ambas máquinas.
+* **Comunidad**: como todavía estoy aprendiendo y probablemente necesite de bastante documentación, viene bien si el task runner elegido cuenta con una gran comunidad activa. Esto lo podemos cuantificar, por ejemplo, con el número de estrellas en Github, si asumimos que cuantas más estrellas, es mucho más probable que exista más documentación.
 
 ### Make
 
@@ -20,9 +16,10 @@ Make es una herramienta ampliamente empleada en la automatización de tareas, y 
 
 Sin embargo, tiene una serie de desventajas, como:
 
-- Requiere aprender Make (y además Bash)
 - Sintaxis un poco confusa
 - Es difícil desarrollar un Makefile que sea multiplataforma.
+
+Make no se llega a ajustar del todo a los criterios, pues uno de ellos es que sea fácilmente compatible entre sistemas, y hacer un Makefile compatible para muchos sistemas puede ser muy tedioso. Además, tampoco cumple con el requisito de facilidad de uso.
 
 ### Mage
 
@@ -32,7 +29,7 @@ Mage te permite tener varios archivos Mage, nombrarlos como desees y son fácile
 
 La opción de Mage sería una buena opción pues, además de estar escrita en Go, utiliza una sintaxis sencilla y legible (al menos lo parece por lo que he visto de Mage). 
 
-En definitiva, sería una buena opción.
+En definitiva, sería una buena opción, a pesar de contar con 5 mil estrellas menos en Github que Task.
 
 ### Task
 
