@@ -4,11 +4,11 @@ En cuanto al task runner, sabemos que hay un montón de opciones diferentes. Pri
 
 ### Criterios
 
-* **Rendimiento:** es importante considerar el rendimiento del task runner, es decir, la velocidad y eficiencia con la que ejecuta las tareas. Esto se puede evaluar mediante pruebas de rendimiento y comparando los tiempos de ejecución de las tareas en diferentes runners.
+* **Lenguaje utilizado:** es conveniente que el task runner elegido esté desarrollado en Go, al igual que mi proyecto, para mantener la consistencia en el código y las prácticas de desarrollo. Por lo tanto, se valorará positivamente aquel task runner escrito en Go.
 
-* **Compatibilidad entre sistemas:** yo mismo trabajo en dos máquinas diferentes, y no tengo el mismo SO en cada una de ellas, así que el task runner debe ser compatible con múltiples SOs para ejecutar tareas sin problemas en ambas máquinas. 
+* **Antigüedad:** conviene que el task runner sea lo más reciente posible, o que tenga versiones recientes. Es señal de que mantienen actualizado el task runner.
 
-* **Comunidad**: como todavía estoy aprendiendo y probablemente necesite de bastante documentación, viene bien si el task runner elegido cuenta con una gran comunidad activa. Esto lo podemos cuantificar, por ejemplo, con el número de estrellas en Github, si asumimos que cuantas más estrellas, es mucho más probable que exista más documentación.
+* **Apoyo en Github**: Github es una de las páginas donde más se suele apoyar un desarrollador a la hora de buscar soluciones a ciertos problemas. Por ello, cuanto más apoyo tenga el task runner en Github, más información disponible hay para trabajar.
 
 ### Make
 
@@ -19,32 +19,22 @@ Sin embargo, tiene una serie de desventajas, como:
 - Sintaxis un poco confusa
 - Es difícil desarrollar un Makefile que sea multiplataforma.
 
-Make no se llega a ajustar del todo a los criterios, pues uno de ellos es que sea fácilmente compatible entre sistemas, y hacer un Makefile compatible para muchos sistemas puede ser muy tedioso. Además, tampoco cumple con el requisito de facilidad de uso.
+Make no se llega a ajustar del todo a los criterios, pues, a pesar de contar con bastante apoyo en Github, no está escrito en Go; y además hay otras alternativas con versiones más recientes.
 
 ### Mage
 
 Los archivos Makefile son difíciles de leer y de escribir en su mayoría debido a que son esencialmente scripts de bash sofisticados con una cantidad significativa de espacios en blanco y sintaxis adicional relacionada con make.
 
-Mage te permite tener varios archivos Mage, nombrarlos como desees y son fáciles de personalizar para múltiples sistemas operativos. Mage no tiene dependencias (a excepción de Go) y funciona perfectamente en todos los sistemas operativos principales, mientras que make generalmente utiliza bash, que no tiene un buen soporte en Windows. Go es superior a bash para cualquier tarea no trivial que implique ramificación, bucles o cualquier cosa que no sea simplemente la ejecución lineal de comandos.
-
-La opción de Mage sería una buena opción pues, además de estar escrita en Go, utiliza una sintaxis sencilla y legible (al menos lo parece por lo que he visto de Mage). 
+La opción de Mage sería una buena opción pues, además de estar escrita en Go, cuenta versiones recientes, como la 1.15.0, de septiembre de 2022. 
 
 En definitiva, sería una buena opción, a pesar de contar con 5 mil estrellas menos en Github que Task.
 
 ### Task
 
-Task es otro de las task runners más comunes utilizados, pues también está escrito en Go, al igual que Mage.
-
 Task utiliza un archivo de configuración en formato YAML para definir las tareas y la ejecución.
 
-Las ventajas que tiene Task son:
-
-- Compatibilidad multiplataforma: task es compatible con diferentes sistemas operativos, por lo que no habrá problema a la hora de ejecutar las tareas en entornos diferentes.
-
-- Dependencias y orden de ejecución: permite definir dependencias entre tareas, lo que significa que una tarea puede depender de la finalización de otra tarea antes de ejecutarse.
-
-- Integración con otros sistemas: se puede integrar fácilmente con sistemas de control de versiones, como Git, lo cuál se ajusta perfectamente a la dinñamica de la asignatura.
+Task es otro de las task runners escritos en Go, además de contar con una versión muy reciente, la 3.31.0, de julio de 2023. Además de esto, cuenta con un grandísimo apoyo en Github, con más de 8,9k estrellas.
 
 ### Decisión
 
-Por todos los motivos explicados anteriormente y por su adecuación a los criterios descritos, el gestor de tareas a utilizar en mi proyecto, va a ser **TASK**
+Como he ido describiendo, la opción que más se adecua a los criterios propuestos es `Task`. Está desarrollado en el propio Go, y además cuenta con un gran apoyo de la comunidad en Github. Por último, La versión 3.31.0 es la más reciente entre las opciones propuestas.
