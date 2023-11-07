@@ -2,17 +2,6 @@ version: '3'
 
 tasks:
 
-  build:
-    label: "Construyendo el proyecto"
-    desc: "Esta tarea construye el proyecto"
-    cmds:
-      - go build -o comparacionEstadistica ./internal/
-  run:
-    label: "Ejecutando el proyecto"
-    desc: "Esta tarea ejecuta el proyecto"
-    cmds:
-      - go run ./internal/
-  
   install-deps:
     label: "Instalando dependencias"
     desc: "Esta tarea instala las dependencias del proyecto"
