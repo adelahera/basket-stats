@@ -23,8 +23,6 @@ En el proyecto, se utilizará `Go Modules` como gestor de dependencias. Puedes e
 
 En el proyecto, se utilizará `Task` como gestor de taraes. Puedes encontrar más información sobre la decisión [aquí](/doc/gestor_tareas.md)
 
-* `task build` : Construye el proyecto
-* `task run` : Ejecuta el proyecto
 * `task install-deps` : Instala las dependencias necesarias
 * `task update-deps` : Actualiza las dependencias
 * `task check` : Comprueba la sintaxis del código

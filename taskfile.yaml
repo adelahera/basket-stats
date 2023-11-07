@@ -18,4 +18,4 @@ tasks:
     label: "Comprobando sintaxis"
     desc: "Esta tarea comprueba la sintaxis del proyecto"
     cmds:
-      - test -z $(gofmt -l ./internal/)
+      - gofmt -e ./internal/ > /dev/null
