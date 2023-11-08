@@ -1,0 +1,21 @@
+version: '3'
+
+tasks:
+
+  install-deps:
+    label: "Instalando dependencias"
+    desc: "Esta tarea instala las dependencias del proyecto"
+    cmds:
+      - go mod download
+
+  update-deps:
+    label: "Actualizando dependencias"
+    desc: "Esta tarea actualiza las dependencias del proyecto"
+    cmds:
+      - go get
+
+  check:
+    label: "Comprobando sintaxis"
+    desc: "Esta tarea comprueba la sintaxis del proyecto"
+    cmds:
+      - gofmt -e ./internal/ > /dev/null
