@@ -3,3 +3,4 @@ entidad: internal/comparacionEstadistica.go
 automatizar:
   fichero: taskfile.yaml
   orden: task
+test: internal/comparacionEstadistica.go

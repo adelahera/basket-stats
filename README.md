@@ -4,24 +4,24 @@ Un periódico deportivo quiere lanzar una aplicación web que sirva para compara
 
 ## Configuración inicial del proyecto
 
-La configuración se puede ver pinchando [aquí](/doc/config.md)
+La configuración se puede ver pinchando [aquí](/doc/config.md).
 
 ## Historias de usuario
 
-Consulte las historias de usuario del proyecto [aquí](/doc/historias_usuario.md)
+Consulte las historias de usuario del proyecto [aquí](/doc/historias_usuario.md).
 
 ## Milestones
 
-Consulte los milestones del proyecto [aquí](/doc/milestones.md)
+Consulte los milestones del proyecto [aquí](/doc/milestones.md).
 
 ## Herramientas utilizadas
 ### Gestor de dependencias
 
-En el proyecto, se utilizará `Go Modules` como gestor de dependencias. Puedes encontrar más información sobre la decisión [aquí](/doc//gestor_dependencias.md)
+En el proyecto, se utilizará `Go Modules` como gestor de dependencias. Puedes encontrar más información sobre la decisión [aquí](/doc//gestor_dependencias.md).
 
 ### Gestor de tareas
 
-En el proyecto, se utilizará `Task` como gestor de taraes. Puedes encontrar más información sobre la decisión [aquí](/doc/gestor_tareas.md)
+En el proyecto, se utilizará `Task` como gestor de taraes. Puedes encontrar más información sobre la decisión [aquí](/doc/gestor_tareas.md).
 
 * `task install-deps` : Instala las dependencias necesarias
 * `task update-deps` : Actualiza las dependencias
@@ -29,5 +29,9 @@ En el proyecto, se utilizará `Task` como gestor de taraes. Puedes encontrar má
 
 ### Comprobador de sintaxis
 
-En el proyecto, se utilizará `gofmt` como comprobador de sintaxis. Puedes encontrar más información sobre la decisión [aquí](/doc/sintaxis.md)
+En el proyecto, se utilizará `gofmt` como comprobador de sintaxis. Puedes encontrar más información sobre la decisión [aquí](/doc/sintaxis.md).
+
+### Herramientas para los tests
+
+Se va a utilizar la biblioteca `testify` como biblioteca de aserciones. Complementando a testify, se utilizará `go test`, de la propia librería estándar de Go, para ordenar la ejecución de los diferentes tests. El proceso de decisión y la documentación sobre las otras opciones que había sobre la mesa puede encontrarse [aquí](/doc/tests.md).
 
