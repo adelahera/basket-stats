@@ -26,6 +26,7 @@ En el proyecto, se utilizará `Task` como gestor de taraes. Puedes encontrar má
 * `task install-deps` : Instala las dependencias necesarias
 * `task update-deps` : Actualiza las dependencias
 * `task check` : Comprueba la sintaxis del código
+* `task test` : Ejecuta los tests
 
 ### Comprobador de sintaxis
 
