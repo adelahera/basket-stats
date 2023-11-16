@@ -6,7 +6,7 @@ type Clave struct {
 }
 
 type Epoca struct {
-	fechaInicio           string
-	fechaFin              string
+	fechaInicio           int
+	fechaFin              int
 	estadisticasJugadores map[Clave]EstadisticasJugador
 }
