@@ -80,7 +80,40 @@ func crearNuevaEpoca(inicioEpoca int) Epoca {
 
 	return epoca
 }
-	return epocas
+
+func añadeJugadorEpoca(epocas map[int]Epoca, clave Clave, jugador EstadisticasJugador) {
+	inicioEpoca := obtenerAñoInicioEpoca(jugador.temporada)
+	if existeEpoca(epocas, inicioEpoca) {
+		if existeJugadorEpoca(epocas[inicioEpoca], clave) {
+			return
+		} else {
+			epocas[inicioEpoca].estadisticasJugadores[clave] = jugador
+		}
+	} else {
+		epoca := crearNuevaEpoca(inicioEpoca)
+		epoca.estadisticasJugadores[clave] = jugador
+		epocas[inicioEpoca] = epoca
+	}
 }
-	return jugador
+
+func añadeEstadisticas(lines [][]string) map[int]Epoca {
+
+	epocas := make(map[int]Epoca)
+
+	for j, line := range lines {
+		if j == 0 || line[1] == "" {
+			continue
+		}
+
+		jugador := extraerDatosCSV(lines, j)
+		clave := Clave{
+			nombreApellidos: jugador.nombreApellidos,
+			temporada:       jugador.temporada,
+		}
+
+		añadeJugadorEpoca(epocas, clave, jugador)
+
+	}
+
+	return epocas
 }
