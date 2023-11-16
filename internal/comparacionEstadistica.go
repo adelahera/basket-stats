@@ -57,6 +57,29 @@ func extraerDatosCSV(lines [][]string, fila int) EstadisticasJugador {
 
 	return jugador
 }
+func existeJugadorEpoca(epoca Epoca, clave Clave) bool {
+	_, existe := epoca.estadisticasJugadores[clave]
+	return existe
+}
+
+func existeEpoca(epocas map[int]Epoca, inicioEpoca int) bool {
+	_, existe := epocas[inicioEpoca]
+	return existe
+}
+
+func obtenerAñoInicioEpoca(temporada int) int {
+	return (temporada / 10) * 10
+}
+
+func crearNuevaEpoca(inicioEpoca int) Epoca {
+	epoca := Epoca{
+		fechaInicio:           inicioEpoca,
+		fechaFin:              inicioEpoca + 9,
+		estadisticasJugadores: make(map[Clave]EstadisticasJugador),
+	}
+
+	return epoca
+}
 	return epocas
 }
 	return jugador
