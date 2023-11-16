@@ -55,8 +55,22 @@ func extraerDatosCSV(lines [][]string, fila int) EstadisticasJugador {
 	rob, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "STL")])
 	perd, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "TOV")])
 
+	jugador := EstadisticasJugador{
+		nombreApellidos: nombre,
+		partidosJugados: partidos,
+		puntos:          pts,
+		equipo:          eq,
+		temporada:       temporada,
+		asistencias:     asis,
+		rebotes:         reb,
+		tapones:         tap,
+		robos:           rob,
+		perdidas:        perd,
+	}
+
 	return jugador
 }
+
 func existeJugadorEpoca(epoca Epoca, clave Clave) bool {
 	_, existe := epoca.estadisticasJugadores[clave]
 	return existe
