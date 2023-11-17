@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"errors"
 	"log"
 	"os"
 	"strconv"
@@ -10,6 +11,30 @@ import (
 type ComparacionEstadistica struct {
 	epocas   map[int]Epoca
 	factores []float64
+}
+
+var camposDeseados = []string{"Nombre", "Equipo", "Temporada", "Partidos", "Puntos", "Asistencias", "Rebotes", "Tapones", "Robos", "Perdidas"}
+
+func compruebaCampoCSV(line []string, campo string) bool {
+
+	for _, campoCSV := range line {
+		if campoCSV == campo {
+			return true
+		}
+	}
+
+	return false
+}
+
+func compruebaTodosCamposCSV(line []string, campos []string) bool {
+
+	for _, campo := range campos {
+		if !compruebaCampoCSV(line, campo) {
+			return false
+		}
+	}
+
+	return true
 }
 
 func LeerCSV(nombre string) ([][]string, error) {
@@ -26,6 +51,10 @@ func LeerCSV(nombre string) ([][]string, error) {
 	lines, err := reader.ReadAll()
 	if err != nil {
 		return nil, err
+	}
+
+	if !compruebaTodosCamposCSV(lines[0], camposDeseados) {
+		return nil, errors.New("El CSV no contiene todos los campos necesarios")
 	}
 
 	return lines, err
