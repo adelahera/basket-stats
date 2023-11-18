@@ -249,3 +249,241 @@ func TestAñadeEstadisticas(t *testing.T) {
 	actual := añadeEstadisticas(lines)
 	assert.Equal(t, expected, actual, "unexpected result")
 }
+
+func TestCalculaMediaEstadistica(t *testing.T) {
+	epoca := Epoca{
+		estadisticasJugadores: map[Clave]EstadisticasJugador{
+			Clave{nombreApellidos: "Kobe Bryant", temporada: 2009}: EstadisticasJugador{
+				partidosJugados: 82,
+				puntos:          2500,
+				asistencias:     400,
+				rebotes:         500,
+				tapones:         50,
+				robos:           100,
+				perdidas:        200,
+			},
+			Clave{nombreApellidos: "Lebron James", temporada: 2016}: EstadisticasJugador{
+				partidosJugados: 82,
+				puntos:          2000,
+				asistencias:     600,
+				rebotes:         700,
+				tapones:         70,
+				robos:           150,
+				perdidas:        250,
+			},
+		},
+	}
+
+	// Test case 1: Calculate average of "Partidos"
+	expected1 := float64(82)
+	actual1 := calculaMediaEstadistica(epoca, "Partidos")
+	assert.Equal(t, expected1, actual1, "unexpected result")
+
+	// Test case 2: Calculate average of "Puntos"
+	expected2 := float64(2250)
+	actual2 := calculaMediaEstadistica(epoca, "Puntos")
+	assert.Equal(t, expected2, actual2, "unexpected result")
+
+	// Test case 3: Calculate average of "Asistencias"
+	expected3 := float64(500)
+	actual3 := calculaMediaEstadistica(epoca, "Asistencias")
+	assert.Equal(t, expected3, actual3, "unexpected result")
+
+	// Test case 4: Calculate average of "Rebotes"
+	expected4 := float64(600)
+	actual4 := calculaMediaEstadistica(epoca, "Rebotes")
+	assert.Equal(t, expected4, actual4, "unexpected result")
+
+	// Test case 5: Calculate average of "Tapones"
+	expected5 := float64(60)
+	actual5 := calculaMediaEstadistica(epoca, "Tapones")
+	assert.Equal(t, expected5, actual5, "unexpected result")
+
+	// Test case 6: Calculate average of "Robos"
+	expected6 := float64(125)
+	actual6 := calculaMediaEstadistica(epoca, "Robos")
+	assert.Equal(t, expected6, actual6, "unexpected result")
+
+	// Test case 7: Calculate average of "Perdidas"
+	expected7 := float64(225)
+	actual7 := calculaMediaEstadistica(epoca, "Perdidas")
+	assert.Equal(t, expected7, actual7, "unexpected result")
+}
+
+func TestNormalizaJugador(t *testing.T) {
+	jugador := EstadisticasJugador{
+		partidosJugados: 82,
+		puntos:          2500,
+		asistencias:     400,
+		rebotes:         500,
+		tapones:         50,
+		robos:           100,
+		perdidas:        200,
+	}
+
+	// Test case 1: Normalize "Partidos" by 50%
+	expected1 := EstadisticasJugador{
+		partidosJugados: 41,
+		puntos:          2500,
+		asistencias:     400,
+		rebotes:         500,
+		tapones:         50,
+		robos:           100,
+		perdidas:        200,
+	}
+	actual1 := normalizaJugador(jugador, 0.5, "Partidos")
+	assert.Equal(t, expected1, actual1, "unexpected result")
+
+	// Test case 2: Normalize "Puntos" by 75%
+	expected2 := EstadisticasJugador{
+		partidosJugados: 82,
+		puntos:          1875,
+		asistencias:     400,
+		rebotes:         500,
+		tapones:         50,
+		robos:           100,
+		perdidas:        200,
+	}
+	actual2 := normalizaJugador(jugador, 0.75, "Puntos")
+	assert.Equal(t, expected2, actual2, "unexpected result")
+
+	// Test case 3: Normalize "Asistencias" by 25%
+	expected3 := EstadisticasJugador{
+		partidosJugados: 82,
+		puntos:          2500,
+		asistencias:     100,
+		rebotes:         500,
+		tapones:         50,
+		robos:           100,
+		perdidas:        200,
+	}
+	actual3 := normalizaJugador(jugador, 0.25, "Asistencias")
+	assert.Equal(t, expected3, actual3, "unexpected result")
+
+	// Test case 4: Normalize "Rebotes" by 80%
+	expected4 := EstadisticasJugador{
+		partidosJugados: 82,
+		puntos:          2500,
+		asistencias:     400,
+		rebotes:         400,
+		tapones:         50,
+		robos:           100,
+		perdidas:        200,
+	}
+	actual4 := normalizaJugador(jugador, 0.8, "Rebotes")
+	assert.Equal(t, expected4, actual4, "unexpected result")
+
+	// Test case 5: Normalize "Tapones" by 10%
+	expected5 := EstadisticasJugador{
+		partidosJugados: 82,
+		puntos:          2500,
+		asistencias:     400,
+		rebotes:         500,
+		tapones:         5,
+		robos:           100,
+		perdidas:        200,
+	}
+	actual5 := normalizaJugador(jugador, 0.1, "Tapones")
+	assert.Equal(t, expected5, actual5, "unexpected result")
+
+	// Test case 6: Normalize "Robos" by 60%
+	expected6 := EstadisticasJugador{
+		partidosJugados: 82,
+		puntos:          2500,
+		asistencias:     400,
+		rebotes:         500,
+		tapones:         50,
+		robos:           60,
+		perdidas:        200,
+	}
+	actual6 := normalizaJugador(jugador, 0.6, "Robos")
+	assert.Equal(t, expected6, actual6, "unexpected result")
+
+	// Test case 7: Normalize "Perdidas" by 90%
+	expected7 := EstadisticasJugador{
+		partidosJugados: 82,
+		puntos:          2500,
+		asistencias:     400,
+		rebotes:         500,
+		tapones:         50,
+		robos:           100,
+		perdidas:        180,
+	}
+	actual7 := normalizaJugador(jugador, 0.9, "Perdidas")
+	assert.Equal(t, expected7, actual7, "unexpected result")
+}
+
+func TestNormalizaEpoca(t *testing.T) {
+	epocaFija := Epoca{
+		fechaInicio: 2000,
+		fechaFin:    2009,
+		estadisticasJugadores: map[Clave]EstadisticasJugador{
+			Clave{nombreApellidos: "Kobe Bryant", temporada: 2009}: EstadisticasJugador{
+				partidosJugados: 82,
+				puntos:          2500,
+				asistencias:     400,
+				rebotes:         500,
+				tapones:         50,
+				robos:           100,
+				perdidas:        200,
+			},
+		},
+	}
+
+	epocaNormalizar := Epoca{
+		fechaInicio: 2010,
+		fechaFin:    2019,
+		estadisticasJugadores: map[Clave]EstadisticasJugador{
+			Clave{nombreApellidos: "Lebron James", temporada: 2016}: EstadisticasJugador{
+				partidosJugados: 82,
+				puntos:          2000,
+				asistencias:     600,
+				rebotes:         700,
+				tapones:         70,
+				robos:           150,
+				perdidas:        250,
+			},
+		},
+	}
+
+	// Test case 1: Normalization successful
+	expected1 := Epoca{
+		fechaInicio: 2010,
+		fechaFin:    2019,
+		estadisticasJugadores: map[Clave]EstadisticasJugador{
+			Clave{nombreApellidos: "Lebron James", temporada: 2016}: EstadisticasJugador{
+				partidosJugados: 82,
+				puntos:          2500,
+				asistencias:     600,
+				rebotes:         700,
+				tapones:         70,
+				robos:           150,
+				perdidas:        250,
+			},
+		},
+	}
+
+	actual1, err1 := normalizaEpoca(epocaFija, epocaNormalizar, "Puntos")
+	assert.NoError(t, err1, "unexpected error")
+	assert.Equal(t, expected1, actual1, "unexpected result")
+
+	// Test case 2: Normalization failed (division by zero)
+	epocaFija = Epoca{
+		fechaInicio: 2000,
+		fechaFin:    2009,
+		estadisticasJugadores: map[Clave]EstadisticasJugador{
+			Clave{nombreApellidos: "Kobe Bryant", temporada: 2009}: EstadisticasJugador{
+				partidosJugados: 82,
+				puntos:          0,
+				asistencias:     400,
+				rebotes:         500,
+				tapones:         50,
+				robos:           100,
+				perdidas:        200,
+			},
+		},
+	}
+	_, err2 := normalizaEpoca(epocaFija, epocaNormalizar, "Puntos")
+	assert.Error(t, err2, "expected error")
+	assert.Contains(t, err2.Error(), "error al normalizar las estadísticas", "unexpected error message")
+}
