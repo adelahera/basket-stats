@@ -202,3 +202,73 @@ func añadeEstadisticas(lines [][]string) map[int]Epoca {
 
 	return epocas
 }
+
+func calculaMediaEstadistica(epoca Epoca, estadistica string) float64 {
+	var suma float64
+	for _, jugador := range epoca.estadisticasJugadores {
+		switch estadistica {
+		case "Partidos":
+			suma += float64(jugador.partidosJugados)
+		case "Puntos":
+			suma += float64(jugador.puntos)
+		case "Asistencias":
+			suma += float64(jugador.asistencias)
+		case "Rebotes":
+			suma += float64(jugador.rebotes)
+		case "Tapones":
+			suma += float64(jugador.tapones)
+		case "Robos":
+			suma += float64(jugador.robos)
+		case "Perdidas":
+			suma += float64(jugador.perdidas)
+		}
+	}
+	return suma / float64(len(epoca.estadisticasJugadores))
+}
+
+func normalizaJugador(jugador EstadisticasJugador, porcentaje float64, estadistica string) EstadisticasJugador {
+	switch estadistica {
+	case "Partidos":
+		jugador.partidosJugados = int(float64(jugador.partidosJugados) * porcentaje)
+	case "Puntos":
+		jugador.puntos = int(float64(jugador.puntos) * porcentaje)
+	case "Asistencias":
+		jugador.asistencias = int(float64(jugador.asistencias) * porcentaje)
+	case "Rebotes":
+		jugador.rebotes = int(float64(jugador.rebotes) * porcentaje)
+	case "Tapones":
+		jugador.tapones = int(float64(jugador.tapones) * porcentaje)
+	case "Robos":
+		jugador.robos = int(float64(jugador.robos) * porcentaje)
+	case "Perdidas":
+		jugador.perdidas = int(float64(jugador.perdidas) * porcentaje)
+	}
+
+	return jugador
+}
+
+func normalizaEpoca(epocaFija Epoca, epocaNormalizar Epoca, estadistica string) (Epoca, error) {
+	mediaEpocaFija := calculaMediaEstadistica(epocaFija, estadistica)
+	mediaEpocaNormalizar := calculaMediaEstadistica(epocaNormalizar, estadistica)
+
+	if mediaEpocaFija == 0 || mediaEpocaNormalizar == 0 {
+		return epocaNormalizar, errors.New("error al normalizar las estadísticas, la media es 0")
+	}
+
+	porcentaje := 1.0
+	if mediaEpocaFija != mediaEpocaNormalizar {
+		porcentaje = mediaEpocaFija / mediaEpocaNormalizar
+	}
+
+	nuevaEpoca := Epoca{
+		fechaInicio:           epocaNormalizar.fechaInicio,
+		fechaFin:              epocaNormalizar.fechaFin,
+		estadisticasJugadores: epocaNormalizar.estadisticasJugadores,
+	}
+
+	for clave, jugador := range nuevaEpoca.estadisticasJugadores {
+		nuevaEpoca.estadisticasJugadores[clave] = normalizaJugador(jugador, porcentaje, estadistica)
+	}
+
+	return nuevaEpoca, nil
+}
