@@ -24,4 +24,4 @@ tasks:
     label: "Ejecutando tests"
     desc: "Esta tarea ejecuta los tests del proyecto"
     cmds:
-      - go test -v ./internal/comparacionEstadistica.go
+      - go test -v ./internal/
