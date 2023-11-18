@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/csv"
 	"errors"
-	"log"
 	"os"
 	"strconv"
 )
@@ -41,8 +40,7 @@ func LeerCSV(nombre string) ([][]string, error) {
 
 	file, err := os.Open(nombre)
 	if err != nil {
-		log.Fatal(err)
-		return nil, err
+		return nil, errors.New("open " + nombre + ": no such file or directory")
 	}
 	defer file.Close()
 
@@ -50,39 +48,83 @@ func LeerCSV(nombre string) ([][]string, error) {
 
 	lines, err := reader.ReadAll()
 	if err != nil {
-		return nil, err
+		return nil, errors.New("el CSV no contiene todos los valores necesarios")
+	}
+
+	if len(lines) == 0 {
+		return nil, errors.New("el CSV esta vacio")
 	}
 
 	if !compruebaTodosCamposCSV(lines[0], camposDeseados) {
-		return nil, errors.New("El CSV no contiene todos los campos necesarios")
+		return nil, errors.New("el CSV no contiene todos los campos necesarios")
 	}
 
 	return lines, err
 }
 
-func obtenerIndiceColumna(line []string, nombreColumna string) int {
+func obtenerIndiceColumna(line []string, nombreColumna string) (int, error) {
 	for i, columna := range line {
 		if columna == nombreColumna {
-			return i
+			return i, nil
 		}
 	}
 
-	return -1
+	return -1, errors.New("no se ha encontrado la columna " + nombreColumna)
 }
 
-func extraerDatosCSV(lines [][]string, fila int) EstadisticasJugador {
+func extraerDatosCSV(lines [][]string, fila int) (EstadisticasJugador, error) {
+	indicePlayer, _ := obtenerIndiceColumna(lines[0], "Nombre")
+	indiceYear, _ := obtenerIndiceColumna(lines[0], "Temporada")
+	indiceG, _ := obtenerIndiceColumna(lines[0], "Partidos")
+	indicePTS, _ := obtenerIndiceColumna(lines[0], "Puntos")
+	indiceTm, _ := obtenerIndiceColumna(lines[0], "Equipo")
+	indiceAST, _ := obtenerIndiceColumna(lines[0], "Asistencias")
+	indiceTRB, _ := obtenerIndiceColumna(lines[0], "Rebotes")
+	indiceBLK, _ := obtenerIndiceColumna(lines[0], "Tapones")
+	indiceSTL, _ := obtenerIndiceColumna(lines[0], "Robos")
+	indiceTOV, _ := obtenerIndiceColumna(lines[0], "Perdidas")
 
-	nombre := lines[fila][obtenerIndiceColumna(lines[0], "Player")]
-	log.Println(obtenerIndiceColumna(lines[0], "Player"))
-	temporada, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "Year")])
-	partidos, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "G")])
-	pts, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "PTS")])
-	eq := lines[fila][obtenerIndiceColumna(lines[0], "Tm")]
-	asis, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "AST")])
-	reb, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "TRB")])
-	tap, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "BLK")])
-	rob, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "STL")])
-	perd, _ := strconv.Atoi(lines[fila][obtenerIndiceColumna(lines[0], "TOV")])
+	nombre := lines[fila][indicePlayer]
+	temporada, err := strconv.Atoi(lines[fila][indiceYear])
+	if err != nil {
+		return EstadisticasJugador{}, errors.New("error al convertir los datos")
+	}
+
+	partidos, err := strconv.Atoi(lines[fila][indiceG])
+	if err != nil {
+		return EstadisticasJugador{}, errors.New("error al convertir los datos")
+	}
+
+	pts, err := strconv.Atoi(lines[fila][indicePTS])
+	if err != nil {
+		return EstadisticasJugador{}, errors.New("error al convertir los datos")
+	}
+
+	eq := lines[fila][indiceTm]
+	asis, err := strconv.Atoi(lines[fila][indiceAST])
+	if err != nil {
+		return EstadisticasJugador{}, errors.New("error al convertir los datos")
+	}
+
+	reb, err := strconv.Atoi(lines[fila][indiceTRB])
+	if err != nil {
+		return EstadisticasJugador{}, errors.New("error al convertir los datos")
+	}
+
+	tap, err := strconv.Atoi(lines[fila][indiceBLK])
+	if err != nil {
+		return EstadisticasJugador{}, errors.New("error al convertir los datos")
+	}
+
+	rob, err := strconv.Atoi(lines[fila][indiceSTL])
+	if err != nil {
+		return EstadisticasJugador{}, errors.New("error al convertir los datos")
+	}
+
+	perd, err := strconv.Atoi(lines[fila][indiceTOV])
+	if err != nil {
+		return EstadisticasJugador{}, errors.New("error al convertir los datos")
+	}
 
 	jugador := EstadisticasJugador{
 		nombreApellidos: nombre,
@@ -97,7 +139,7 @@ func extraerDatosCSV(lines [][]string, fila int) EstadisticasJugador {
 		perdidas:        perd,
 	}
 
-	return jugador
+	return jugador, nil
 }
 
 func existeJugadorEpoca(epoca Epoca, clave Clave) bool {
@@ -148,7 +190,7 @@ func añadeEstadisticas(lines [][]string) map[int]Epoca {
 			continue
 		}
 
-		jugador := extraerDatosCSV(lines, j)
+		jugador, _ := extraerDatosCSV(lines, j)
 		clave := Clave{
 			nombreApellidos: jugador.nombreApellidos,
 			temporada:       jugador.temporada,
