@@ -85,44 +85,17 @@ func extraerDatosCSV(lines [][]string, fila int) (EstadisticasJugador, error) {
 	indiceTOV, _ := obtenerIndiceColumna(lines[0], "Perdidas")
 
 	nombre := lines[fila][indicePlayer]
-	temporada, err := strconv.Atoi(lines[fila][indiceYear])
-	if err != nil {
-		return EstadisticasJugador{}, errors.New("error al convertir los datos")
-	}
-
-	partidos, err := strconv.Atoi(lines[fila][indiceG])
-	if err != nil {
-		return EstadisticasJugador{}, errors.New("error al convertir los datos")
-	}
-
-	pts, err := strconv.Atoi(lines[fila][indicePTS])
-	if err != nil {
-		return EstadisticasJugador{}, errors.New("error al convertir los datos")
-	}
-
+	temporada, tempErr := strconv.Atoi(lines[fila][indiceYear])
+	partidos, partidosErr := strconv.Atoi(lines[fila][indiceG])
+	pts, ptsErr := strconv.Atoi(lines[fila][indicePTS])
 	eq := lines[fila][indiceTm]
-	asis, err := strconv.Atoi(lines[fila][indiceAST])
-	if err != nil {
-		return EstadisticasJugador{}, errors.New("error al convertir los datos")
-	}
+	asis, asisErr := strconv.Atoi(lines[fila][indiceAST])
+	reb, rebErr := strconv.Atoi(lines[fila][indiceTRB])
+	tap, tapErr := strconv.Atoi(lines[fila][indiceBLK])
+	rob, robErR := strconv.Atoi(lines[fila][indiceSTL])
+	perd, perdErr := strconv.Atoi(lines[fila][indiceTOV])
 
-	reb, err := strconv.Atoi(lines[fila][indiceTRB])
-	if err != nil {
-		return EstadisticasJugador{}, errors.New("error al convertir los datos")
-	}
-
-	tap, err := strconv.Atoi(lines[fila][indiceBLK])
-	if err != nil {
-		return EstadisticasJugador{}, errors.New("error al convertir los datos")
-	}
-
-	rob, err := strconv.Atoi(lines[fila][indiceSTL])
-	if err != nil {
-		return EstadisticasJugador{}, errors.New("error al convertir los datos")
-	}
-
-	perd, err := strconv.Atoi(lines[fila][indiceTOV])
-	if err != nil {
+	if tempErr != nil || partidosErr != nil || ptsErr != nil || asisErr != nil || rebErr != nil || tapErr != nil || robErR != nil || perdErr != nil {
 		return EstadisticasJugador{}, errors.New("error al convertir los datos")
 	}
 
