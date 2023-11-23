@@ -487,3 +487,152 @@ func TestNormalizaEpoca(t *testing.T) {
 	assert.Error(t, err2, "expected error")
 	assert.Contains(t, err2.Error(), "error al normalizar las estadísticas", "unexpected error message")
 }
+
+func TestEstadisticaSimilar(t *testing.T) {
+	jugador1 := EstadisticasJugador{
+		partidosJugados: 82,
+		puntos:          2500,
+		asistencias:     400,
+		rebotes:         500,
+		tapones:         50,
+		robos:           100,
+		perdidas:        200,
+	}
+
+	jugador2 := EstadisticasJugador{
+		partidosJugados: 82,
+		puntos:          2000,
+		asistencias:     300,
+		rebotes:         400,
+		tapones:         40,
+		robos:           80,
+		perdidas:        150,
+	}
+
+	// Test case 1: Valid similarity threshold
+	umbralPorcentaje := 50.0
+	expected1 := true
+	actual1, err1 := estadisticaSimilar(jugador1, jugador2, "Partidos", umbralPorcentaje)
+	assert.NoError(t, err1, "unexpected error")
+	assert.Equal(t, expected1, actual1, "unexpected result")
+
+	// Test case 2: Invalid similarity threshold (less than 0)
+	umbralPorcentaje = -10.0
+	_, err2 := estadisticaSimilar(jugador1, jugador2, "Puntos", umbralPorcentaje)
+	assert.EqualError(t, err2, "umbral de similitud no válido", "unexpected error")
+
+	// Test case 3: Invalid similarity threshold (greater than 100)
+	umbralPorcentaje = 110.0
+	_, err3 := estadisticaSimilar(jugador1, jugador2, "Asistencias", umbralPorcentaje)
+	assert.EqualError(t, err3, "umbral de similitud no válido", "unexpected error")
+
+	// Test case 4: Invalid field
+	umbralPorcentaje = 80.0
+	_, err4 := estadisticaSimilar(jugador1, jugador2, "Faltante", umbralPorcentaje)
+	assert.EqualError(t, err4, "campo de estadísticas no válido", "unexpected error")
+}
+
+func TestComparaJugadores(t *testing.T) {
+	epocaFija := Epoca{
+		estadisticasJugadores: map[Clave]EstadisticasJugador{
+			Clave{nombreApellidos: "Kobe Bryant", temporada: 2009}: EstadisticasJugador{
+				nombreApellidos: "Kobe Bryant",
+				temporada:       2009,
+				partidosJugados: 82,
+				puntos:          2500,
+				equipo:          "LAL",
+				asistencias:     400,
+				rebotes:         500,
+				tapones:         50,
+				robos:           100,
+				perdidas:        200,
+			},
+		},
+	}
+
+	epocaNormalizada := Epoca{
+		estadisticasJugadores: map[Clave]EstadisticasJugador{
+			Clave{nombreApellidos: "Lebron James", temporada: 2012}: EstadisticasJugador{
+				nombreApellidos: "Lebron James",
+				temporada:       2012,
+				partidosJugados: 82,
+				puntos:          2400,
+				equipo:          "CLE",
+				asistencias:     380,
+				rebotes:         480,
+				tapones:         45,
+				robos:           90,
+				perdidas:        180,
+			},
+		},
+	}
+
+	estadistica := "Puntos"
+
+	// Test case 1: Valid input, similar players found
+	expected1 := map[Clave][]Clave{
+		Clave{nombreApellidos: "Lebron James", temporada: 2012}: []Clave{
+			Clave{nombreApellidos: "Kobe Bryant", temporada: 2009},
+		},
+	}
+	actual1, err1 := comparaJugadores(epocaFija, epocaNormalizada, estadistica, 10)
+	assert.NoError(t, err1, "unexpected error")
+	assert.Equal(t, expected1, actual1, "unexpected result")
+}
+
+func TestComparaJugadores_NoSimilarity(t *testing.T) {
+	// Test case 2: Valid input, no similar players found
+	epocaFija := Epoca{
+		estadisticasJugadores: map[Clave]EstadisticasJugador{
+			Clave{nombreApellidos: "Kobe Bryant", temporada: 2009}: EstadisticasJugador{
+				nombreApellidos: "Kobe Bryant",
+				temporada:       2009,
+				partidosJugados: 82,
+				puntos:          2500,
+				equipo:          "LAL",
+				asistencias:     400,
+				rebotes:         500,
+				tapones:         50,
+				robos:           100,
+				perdidas:        200,
+			},
+			Clave{nombreApellidos: "Pau Gasol", temporada: 2009}: EstadisticasJugador{
+				nombreApellidos: "Pau Gasol",
+				temporada:       2009,
+				partidosJugados: 82,
+				puntos:          200,
+				equipo:          "LAL",
+				asistencias:     400,
+				rebotes:         500,
+				tapones:         50,
+				robos:           100,
+				perdidas:        200,
+			},
+		},
+	}
+
+	epocaNormalizar := Epoca{
+		estadisticasJugadores: map[Clave]EstadisticasJugador{
+			Clave{nombreApellidos: "Lebron James", temporada: 2012}: EstadisticasJugador{
+				nombreApellidos: "Lebron James",
+				temporada:       2012,
+				partidosJugados: 82,
+				puntos:          200,
+				equipo:          "CLE",
+				asistencias:     380,
+				rebotes:         480,
+				tapones:         45,
+				robos:           90,
+				perdidas:        180,
+			},
+		},
+	}
+
+	estadistica := "Puntos"
+	expected2 := map[Clave][]Clave{
+		Clave{nombreApellidos: "Lebron James", temporada: 2012}: []Clave{},
+	}
+	actual2, err2 := comparaJugadores(epocaFija, epocaNormalizar, estadistica, 10)
+	assert.NoError(t, err2, "unexpected error")
+	assert.Equal(t, expected2, actual2, "unexpected result")
+}
