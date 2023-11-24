@@ -200,6 +200,65 @@ func calculaMediaEstadistica(epoca Epoca, estadistica string) float64 {
 	return suma / float64(len(epoca.estadisticasJugadores))
 }
 
+func calculaMediaJugadorEpoca(epoca Epoca, jugador Clave, estadistica string) (float64, error) {
+	var total float64
+	var totalPartidos float64
+
+	switch estadistica {
+	case "Partidos":
+		for _, jugadorEpoca := range epoca.estadisticasJugadores {
+			if jugadorEpoca.nombreApellidos == jugador.nombreApellidos {
+				total += float64(jugadorEpoca.partidosJugados)
+			}
+		}
+	case "Puntos":
+		for _, jugadorEpoca := range epoca.estadisticasJugadores {
+			if jugadorEpoca.nombreApellidos == jugador.nombreApellidos {
+				total += float64(jugadorEpoca.puntos)
+			}
+		}
+	case "Asistencias":
+		for _, jugadorEpoca := range epoca.estadisticasJugadores {
+			if jugadorEpoca.nombreApellidos == jugador.nombreApellidos {
+				total += float64(jugadorEpoca.asistencias)
+			}
+		}
+	case "Rebotes":
+		for _, jugadorEpoca := range epoca.estadisticasJugadores {
+			if jugadorEpoca.nombreApellidos == jugador.nombreApellidos {
+				total += float64(jugadorEpoca.rebotes)
+			}
+		}
+	case "Tapones":
+		for _, jugadorEpoca := range epoca.estadisticasJugadores {
+			if jugadorEpoca.nombreApellidos == jugador.nombreApellidos {
+				total += float64(jugadorEpoca.tapones)
+			}
+		}
+	case "Robos":
+		for _, jugadorEpoca := range epoca.estadisticasJugadores {
+			if jugadorEpoca.nombreApellidos == jugador.nombreApellidos {
+				total += float64(jugadorEpoca.robos)
+			}
+		}
+	case "Perdidas":
+		for _, jugadorEpoca := range epoca.estadisticasJugadores {
+			if jugadorEpoca.nombreApellidos == jugador.nombreApellidos {
+				total += float64(jugadorEpoca.perdidas)
+			}
+		}
+	}
+
+	for _, jugadorEpoca := range epoca.estadisticasJugadores {
+		if jugadorEpoca.nombreApellidos == jugador.nombreApellidos {
+			totalPartidos += float64(jugadorEpoca.partidosJugados)
+		}
+	}
+
+	return total / totalPartidos, nil
+
+}
+
 func normalizaJugador(jugador EstadisticasJugador, porcentaje float64, estadistica string) EstadisticasJugador {
 	switch estadistica {
 	case "Partidos":
@@ -254,36 +313,9 @@ func porcentajeDiff(a, b int) (float64, error) {
 	return math.Abs(float64(a-b)) / float64(a) * 100.0, nil
 }
 
-func estadisticaSimilar(jugador1 EstadisticasJugador, jugador2 EstadisticasJugador, campo string, umbralPorcentaje float64) (bool, error) {
-	if umbralPorcentaje < 0 || umbralPorcentaje > 100 {
-		return false, errors.New("umbral de similitud no válido")
-	}
-
-	switch campo {
-	case "Partidos":
-		variacion, _ := porcentajeDiff(jugador1.partidosJugados, jugador2.partidosJugados)
-		return variacion <= umbralPorcentaje, nil
-	case "Puntos":
-		variacion, _ := porcentajeDiff(jugador1.puntos, jugador2.puntos)
-		return variacion <= umbralPorcentaje, nil
-	case "Asistencias":
-		variacion, _ := porcentajeDiff(jugador1.asistencias, jugador2.asistencias)
-		return variacion <= umbralPorcentaje, nil
-	case "Rebotes":
-		variacion, _ := porcentajeDiff(jugador1.rebotes, jugador2.rebotes)
-		return variacion <= umbralPorcentaje, nil
-	case "Tapones":
-		variacion, _ := porcentajeDiff(jugador1.tapones, jugador2.tapones)
-		return variacion <= umbralPorcentaje, nil
-	case "Robos":
-		variacion, _ := porcentajeDiff(jugador1.robos, jugador2.robos)
-		return variacion <= umbralPorcentaje, nil
-	case "Perdidas":
-		variacion, _ := porcentajeDiff(jugador1.perdidas, jugador2.perdidas)
-		return variacion <= umbralPorcentaje, nil
-	}
-
-	return false, errors.New("campo de estadísticas no válido")
+func estadisticaSimilares(jugador1 float64, jugador2 float64, umbralPorcentaje float64) bool {
+	variacion, _ := porcentajeDiff(int(jugador1), int(jugador2))
+	return variacion <= umbralPorcentaje
 }
 
 func comparaJugadores(epocaFija Epoca, epocaNormalizada Epoca, estadistica string, umbral float64) (map[Clave][]Clave, error) {
@@ -298,14 +330,18 @@ func comparaJugadores(epocaFija Epoca, epocaNormalizada Epoca, estadistica strin
 			nombreApellidos: jugadorNormalizado.nombreApellidos,
 			temporada:       jugadorNormalizado.temporada,
 		}
+		mediaJugadorNormalizado, _ := calculaMediaJugadorEpoca(epocaNormalizada, claveNormalizado, estadistica)
 		similares := make([]Clave, 0)
 		comparador[claveNormalizado] = similares
+
 		for _, jugadorFijo := range epocaFija.estadisticasJugadores {
-			if ok, _ := estadisticaSimilar(jugadorFijo, jugadorNormalizado, estadistica, umbral); ok {
-				claveFijo := Clave{
-					nombreApellidos: jugadorFijo.nombreApellidos,
-					temporada:       jugadorFijo.temporada,
-				}
+			claveFijo := Clave{
+				nombreApellidos: jugadorFijo.nombreApellidos,
+				temporada:       jugadorFijo.temporada,
+			}
+			mediaJugadorFijo, _ := calculaMediaJugadorEpoca(epocaFija, claveFijo, estadistica)
+			if ok := estadisticaSimilares(mediaJugadorFijo, mediaJugadorNormalizado, umbral); ok {
+
 				similares = append(similares, claveFijo)
 				comparador[claveNormalizado] = similares
 
