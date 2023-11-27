@@ -19,3 +19,9 @@ tasks:
     desc: "Esta tarea comprueba la sintaxis del proyecto"
     cmds:
       - gofmt -e ./internal/ > /dev/null
+      
+  test:
+    label: "Ejecutando tests"
+    desc: "Esta tarea ejecuta los tests del proyecto"
+    cmds:
+      - go test -v ./internal/
