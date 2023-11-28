@@ -36,3 +36,20 @@ En el proyecto, se utilizará `gofmt` como comprobador de sintaxis. Puedes encon
 
 Se va a utilizar la biblioteca `testify` como biblioteca de aserciones. Complementando a testify, se utilizará `go test`, de la propia librería estándar de Go, para ordenar la ejecución de los diferentes tests. El proceso de decisión y la documentación sobre las otras opciones que había sobre la mesa puede encontrarse [aquí](/doc/tests.md).
 
+## Contenedor para pruebas
+
+Se puede utilizar Docker para probar el proyecto. Para ello, se debe ejecutar el
+siguiente comando, para construir y ejecutar el contenedor:
+
+```bash
+docker build -t adlhl/basket-stats . && docker run -t -v `pwd`:/app/test adlhl/basket-stats
+```
+
+Para solo ejecutar el contenedor:
+
+```bash
+docker run -t -v `pwd`:/app/test adlhl/basket-stats
+```
+
+También se puede usar la imagen de
+[Docker Hub](https://hub.docker.com/repository/docker/adlhl/basket-stats/general)
