@@ -7,12 +7,14 @@ RUN adduser -D -u 1001 test
 
 USER test
 
-WORKDIR /app/test
+WORKDIR /app
 
 RUN go install github.com/go-task/task/v3/cmd/task@latest
 
 COPY go.mod go.sum taskfile.yaml ./
 
 RUN go mod download
+
+WORKDIR /app/test
 
 ENTRYPOINT ["task", "test"]
