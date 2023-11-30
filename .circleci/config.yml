@@ -1,0 +1,14 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: adlhl/basket-stats:latest
+    steps:
+      - checkout
+      - run:
+           task test
+workflows:
+  sample:
+    jobs:
+      - build-and-test
