@@ -30,17 +30,20 @@ Incluye un conjunto más amplio de utilidades y bibliotecas por defecto. Esto ha
 
 Optar por una imagen de Debian para un entorno Go presenta características particulares. Similar a Ubuntu, Debian ofrece una imagen más amplia debido a la inclusión de utilidades y bibliotecas por defecto, lo que resulta en un entorno más cómodo para el desarrollo y la depuración. Al igual que Ubuntu, Debian cuenta con un sistema de gestión de paquetes robusto (apt), permitiendo una fácil instalación de dependencias adicionales. Cuenta con un sólido soporte y actualizaciones regulares.
 
+### Imagen de Bitnami
+
+Bitnami ofrece imágenes actualizadas automáticamente, basadas en minideb, una imagen de contenedor Debian minimalista, lo que facilita la transición entre contenedores, máquinas virtuales y imágenes en la nube. Todas las imágenes están firmadas con Docker Content Trust para garantizar su integridad. Bitnami publica regularmente nuevas versiones con las últimas correcciones y características
+
 ## Decisión
 
-Leyendo un poco la documentación sobre las diferentes opciones, observamos que el criterio de seguridad es ampliamente cumplido por todas las opciones. Aunque las últimas actualizaciones de Ubuntu y Debian son de octubre de 2023, no hay una gran diferencia con la última de Alpine o la de Golang, que son un mes anterior. 
+Leyendo un poco la documentación sobre las diferentes opciones, observamos que el criterio de seguridad es ampliamente cumplido por todas las opciones. Aunque las últimas actualizaciones de Ubuntu y Debian son de octubre de 2023, no hay una gran diferencia con la última de Alpine o la de Golang, que son un mes anterior. En cuanto a Bitnami, su última actualización es de hace sólo 22 días.
 
-En cuanto a compatibilidad con Go, tampoco habría una gran diferencia entre usar una u otra, todas las opciones traen Go por defecto y están preparadas para correr aplicaciones en Go.
+En cuanto a compatibilidad con Go, tampoco habría una gran diferencia entre usar una u otra, las imágenes suelen traer Go por defecto, y en caso de que no, instalarlo manualmente no es complicado.
 
-Donde sí encontramos una gran diferencia es en el tamaño de las imagenes. Ubuntu y Debian traen un paquete de herramientas y bibliotecas demasiado amplio, lo cual hace que su tamaño aumente considerablemente. Sin embargo, con la imagen oficial de Golang, se reduce muchísimo el tamaño, pues prácticamente trae lo esencial para poder ejecutar aplicaciones de Go, y poco más. 
+Donde sí encontramos una gran diferencia es en el tamaño de las imagenes. Ubuntu y Debian traen un paquete de herramientas y bibliotecas demasiado amplio, lo cual hace que su tamaño aumente considerablemente. Sin embargo, los contenedores que usan las imágenes oficiales, a pesar de contar con miles de pulls más, suelen incluir un montón de funcionalidades que no vienen al caso, como puede ser Python o Perl, que en nuestro proyecto no es recomendable. 
 
-Como ya he dicho anteriormente, para la realización de este proyecto no se requiere de una gran cantidad de herramientas ni se utilizan apenas bibliotecas externas, por lo que, guíandonos por el tamaño, la mejor opción es usar la imagen oficial de Go.
+Quizá por este motivo, utilizar la imagen proporcionada por Bitnami sea la opción más viable. No nos va a incluir bibliotecas ni funcionalidades no necesarias, lo cual va a mantener el tamaño de la imagen más reducido. 
 
-Dentro de la imagen oficial de Go, usaré la variante que trae con Alpine, pues reduce aún más el tamaño de la imagen, lo que debe aumentar la velocidad de ejecución. A pesar de no tener herramientas instaladas como git o bash, al apenas necesitar otras herramientas, no supone un gran trabajo instalar las necesarias manualmente.
 
 
 
