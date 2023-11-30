@@ -34,3 +34,5 @@ Drone es una plataforma de CI/CD gratuita y de código abierto que, aunque puede
 Como hemos podido comprobar, todas los servicios son muy competentes. Sin embargo, hay algunos que no llegar a cumplir los requisitos, como Drone (ya que habría que tenerlo instalado en local), o Travis (que no es gratuito), o Jenkins (que está hecho en Java). Por ello, nos quedan 2 opciones; probar Github Actions, que sería gratuito para nuestro proyecto al tratarse de un repositorio público; y CircleCI, que habría que usar parte de los 6000 minutos gratis que nos ofrecen.
 
 En caso de que nuestro proyecto gastara los 6000 minutos que nos ofree CircleCI, ya no sería gratuito, por lo que la mejor opción para nuestro sería utilizar Github Actions. Sin embargo, como se trata de aprender y probar cosas nuevas, voy a utilizar ambos (al menos probarlos), y a partir de ahí, tomar una decisión.
+
+Una vez probadas ambas opciones, me he decantado por utilizar Github Actions porque, CircleCI, por algún motivo, me dice que es incompatible con Github Checks en mi repositorio.
