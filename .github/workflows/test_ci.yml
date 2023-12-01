@@ -21,7 +21,7 @@ jobs:
       run: |
         go mod edit -go=${{matrix.go}}
         go mod download
-        go mod tidy
+        go mod tidy -go=${{matrix.go}}
         
     - name: Run tests
       run: go test -v ./...
