@@ -19,7 +19,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        go mod edit -go=${{matrix.go}}
+        sed -i 's/1.21/${{matrix.go}}/g' go.mod
         go mod download
         go mod tidy -go=${{matrix.go}}
         
