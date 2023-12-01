@@ -9,10 +9,6 @@
 
 ## Opciones
 
-### Jenkins
-
-Jenkins, una herramienta de integración continua de código abierto, es altamente configurable y gratuita. Aunque requiere más configuración, se integra con GitHub Checks mediante plugins y ofrece soporte Docker a través del plugin "Docker Pipeline". Con una comunidad activa, Jenkins es una opción sólida y confiable. Punto negativo, está hecho en Java.
-
 ### Travis CI
 
 Travis CI es una plataforma de integración continua que destaca por su fácil configuración y se integra sin problemas con GitHub Checks y Docker. Es conocido por su fiabilidad y actualizaciones frecuentes, siendo una opción popular en el desarrollo de proyectos open source. Punto negativo, no es un servicio gratuito.
