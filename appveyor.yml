@@ -1,0 +1,16 @@
+environment:
+  matrix:
+    - GO_VERSION: "1.20"
+    - GO_VERSION: "1.21"
+
+  GOPATH: c:\gopath
+
+before_test:
+  - set PATH=C:\go%GO_VERSION%\bin;%PATH%
+  - set GOROOT=C:\go%GO_VERSION%
+  - go vet ./...
+
+test_script:
+  - go version
+  - go env
+  - go test -v ./...
