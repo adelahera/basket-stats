@@ -1,5 +1,9 @@
 build: off
 
+skip_commits:
+  files:
+    - "README.md"
+
 environment: 
   matrix:
     - GO_VERSION: "120"
