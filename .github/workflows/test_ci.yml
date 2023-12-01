@@ -19,9 +19,11 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sed -i 's/1.21/${{matrix.go}}/g' go.mod
+        if [ "${{matrix.go}}" == "1.20" ]; then
+        go mod edit -go=1.20
         go mod download
-        go mod tidy -go=${{matrix.go}}
-        
+        go mod tidy
+        fi
+  
     - name: Run tests
       run: go test -v ./...
