@@ -4,3 +4,7 @@ automatizar:
   fichero: taskfile.yaml
   orden: task
 test: internal/comparacionEstadistica_test.go
+CI:
+  - .appveyor.yml
+  - .github/workflows/test_ci.yml
+  - .circleci/config.yml
