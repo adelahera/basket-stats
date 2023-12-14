@@ -1,0 +1,29 @@
+name: Go Test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        go: [1.21,"1.20"]
+
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v4
+
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        if [ "${{matrix.go}}" == "1.20" ]; then
+        go mod edit -go=1.20
+        go mod download
+        go mod tidy
+        fi
+  
+    - name: Run tests
+      run: go test -v ./...

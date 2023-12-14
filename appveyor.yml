@@ -1,0 +1,22 @@
+skip_branch_with_pr: true
+build: off
+skip_commits:
+  files:
+    - "README.md"
+
+environment: 
+  matrix:
+    - GO_VERSION: "120"
+    - GO_VERSION: "121"
+
+  GOPATH: c:\gopath
+
+before_test:
+  - set PATH=C:\go%GO_VERSION%\bin;%PATH%
+  - set GOROOT=C:\go%GO_VERSION%
+  - go vet ./...
+
+test_script:
+  - go version
+  - go env
+  - go test -v ./...

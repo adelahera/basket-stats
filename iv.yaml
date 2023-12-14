@@ -1,6 +1,10 @@
 lenguaje: Go
-entidad: internal/comparacionEstadistica.go
+entidad: internal/comparacion_estadistica.go
 automatizar:
   fichero: taskfile.yaml
   orden: task
-test: internal/comparacionEstadistica_test.go
+test: internal/comparacion_estadistica_test.go
+CI:
+  - appveyor.yml
+  - .github/workflows/test_ci.yml
+  - .circleci/config.yml
