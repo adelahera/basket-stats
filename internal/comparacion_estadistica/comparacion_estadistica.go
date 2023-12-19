@@ -1,4 +1,4 @@
-package main
+package comparacion_estadistica
 
 import (
 	"encoding/csv"
@@ -16,7 +16,6 @@ type ComparacionEstadistica struct {
 var camposDeseados = []string{"Nombre", "Equipo", "Temporada", "Partidos", "Puntos", "Asistencias", "Rebotes", "Tapones", "Robos", "Perdidas"}
 
 func compruebaCampoCSV(line []string, campo string) bool {
-
 	for _, campoCSV := range line {
 		if campoCSV == campo {
 			return true
@@ -27,7 +26,6 @@ func compruebaCampoCSV(line []string, campo string) bool {
 }
 
 func compruebaTodosCamposCSV(line []string, campos []string) bool {
-
 	for _, campo := range campos {
 		if !compruebaCampoCSV(line, campo) {
 			return false
@@ -141,7 +139,9 @@ func crearNuevaEpoca(inicioEpoca int) Epoca {
 }
 
 func añadeJugadorEpoca(epocas map[int]Epoca, clave Clave, jugador EstadisticasJugador) {
+
 	inicioEpoca := obtenerAñoInicioEpoca(jugador.temporada)
+
 	if existeEpoca(epocas, inicioEpoca) {
 		if existeJugadorEpoca(epocas[inicioEpoca], clave) {
 			return
@@ -171,7 +171,6 @@ func añadeEstadisticas(lines [][]string) map[int]Epoca {
 		}
 
 		añadeJugadorEpoca(epocas, clave, jugador)
-
 	}
 
 	return epocas
@@ -341,10 +340,8 @@ func comparaJugadores(epocaFija Epoca, epocaNormalizada Epoca, estadistica strin
 			}
 			mediaJugadorFijo, _ := calculaMediaJugadorEpoca(epocaFija, claveFijo, estadistica)
 			if ok := estadisticaSimilares(mediaJugadorFijo, mediaJugadorNormalizado, umbral); ok {
-
 				similares = append(similares, claveFijo)
 				comparador[claveNormalizado] = similares
-
 			}
 		}
 	}

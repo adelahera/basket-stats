@@ -1,4 +1,4 @@
-package main
+package comparacion_estadistica
 
 type Clave struct {
 	nombreApellidos string

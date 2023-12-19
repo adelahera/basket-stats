@@ -1,4 +1,4 @@
-package main
+package comparacion_estadistica
 
 import (
 	"testing"
