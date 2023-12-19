@@ -8,18 +8,18 @@ import (
 
 func TestLeerCSV(t *testing.T) {
 	// Test case 1: Valid CSV file
-	lines, err := LeerCSV("../data/tests/valid.csv")
+	lines, err := LeerCSV("../../data/tests/valid.csv")
 	assert.NoError(t, err, "no se esperaba un error")
 	assert.NotNil(t, lines, "las líneas no deberían ser nulas")
 
 	// Test case 2: Invalid CSV file
-	lines, err = LeerCSV("../data/tests/invalid.csv")
+	lines, err = LeerCSV("../../data/tests/invalid.csv")
 	assert.Error(t, err, "se esperaba un error")
 	assert.Nil(t, lines, "las líneas deberían ser nulas")
 	assert.EqualError(t, err, "el CSV no contiene todos los campos necesarios", "mensaje de error inesperado")
 
 	// Test case 3: Empty CSV file
-	lines, err = LeerCSV("../data/tests/empty.csv")
+	lines, err = LeerCSV("../../data/tests/empty.csv")
 	assert.Error(t, err, "se esperaba un error")
 	assert.Nil(t, lines, "las líneas deberían ser nulas")
 	assert.EqualError(t, err, "el CSV esta vacio", "mensaje de error inesperado")
@@ -32,7 +32,7 @@ func TestLeerCSV(t *testing.T) {
 	assert.EqualError(t, err, "open "+nombreArchivoInexistente+": no such file or directory", "mensaje de error inesperado")
 
 	// Test case 5: Missing columns
-	lines, err = LeerCSV("../data/tests/missing_columns.csv")
+	lines, err = LeerCSV("../../data/tests/missing_columns.csv")
 	assert.Error(t, err, "se esperaba un error")
 	assert.Nil(t, lines, "las líneas deberían ser nulas")
 	assert.EqualError(t, err, "el CSV no contiene todos los valores necesarios", "mensaje de error inesperado")
