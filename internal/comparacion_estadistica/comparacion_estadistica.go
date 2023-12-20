@@ -371,7 +371,7 @@ func comparaJugadores(epocaFija Epoca, epocaNormalizada Epoca, estadistica strin
 	epocaNormalizada, err := normalizaEpoca(epocaFija, epocaNormalizada, estadistica)
 	if err != nil {
 		logger.Error().Msg("Error al normalizar las estadísticas:" + err.Error())
-		return nil, errors.New("error al normalizar las estadísticas")
+		return nil, err
 	}
 	comparador := make(map[Clave][]Clave)
 
@@ -383,7 +383,7 @@ func comparaJugadores(epocaFija Epoca, epocaNormalizada Epoca, estadistica strin
 		mediaJugadorNormalizado, err := calculaMediaJugadorEpoca(epocaNormalizada, claveNormalizado, estadistica)
 		if err != nil {
 			logger.Error().Msg("Error al calcular la media de las estadísticas:" + err.Error())
-			return nil, errors.New("error al calcular la media de las estadísticas")
+			return nil, err
 		}
 		similares := make([]Clave, 0)
 		comparador[claveNormalizado] = similares
@@ -397,12 +397,12 @@ func comparaJugadores(epocaFija Epoca, epocaNormalizada Epoca, estadistica strin
 			mediaJugadorFijo, err := calculaMediaJugadorEpoca(epocaFija, claveFijo, estadistica)
 			if err != nil {
 				logger.Error().Msg("Error al calcular la media de las estadísticas:" + err.Error())
-				return nil, errors.New("error al calcular la media de las estadísticas")
+				return nil, err
 			}
 			if ok, err := estadisticaSimilares(mediaJugadorFijo, mediaJugadorNormalizado, umbral); ok {
 				if err != nil {
 					logger.Error().Msg("Error al calcular la variación de las estadísticas:" + err.Error())
-					return nil, errors.New("error al calcular la variación de las estadísticas")
+					return nil, err
 				}
 				logger.Info().Msg("Jugador " + jugadorNormalizado.nombreApellidos + " es similar a " + jugadorFijo.nombreApellidos)
 				similares = append(similares, claveFijo)
