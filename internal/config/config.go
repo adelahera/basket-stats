@@ -13,7 +13,7 @@ type Config struct {
 	LogFile   string `mapstructure:"log-file"`
 }
 
-var Conf *Config
+var conf *Config
 
 func newConfig() (*Config, error) {
 	viper.AutomaticEnv()
@@ -51,12 +51,12 @@ func newConfig() (*Config, error) {
 }
 
 func GetConfig() (*Config, error) {
-	if Conf == nil {
+	if conf == nil {
 		var err error
-		Conf, err = newConfig()
+		conf, err = newConfig()
 		if err != nil {
 			return nil, err
 		}
 	}
-	return Conf, nil
+	return conf, nil
 }
