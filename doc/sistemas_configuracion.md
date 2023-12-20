@@ -12,15 +12,15 @@ Una biblioteca de configuración simplifica el proceso de trabajar con configura
 
 ### Viper
 
-Viper es una biblioteca de configuración en Go que proporciona una solución completa y flexible. Permite cargar configuraciones desde múltiples fuentes como archivos, variables de entorno, sistemas de distribución como etcd, y flags de línea de comandos. Viper admite diversos formatos de archivos de configuración y ofrece funciones para trabajar con valores predeterminados, validación y recarga en caliente.
+[Viper](https://github.com/spf13/viper) es una biblioteca de configuración en Go que proporciona una solución completa y flexible. Permite cargar configuraciones desde múltiples fuentes como archivos, variables de entorno, sistemas de distribución como etcd, y flags de línea de comandos. Viper admite diversos formatos de archivos de configuración y ofrece funciones para trabajar con valores predeterminados, validación y recarga en caliente.
 
 ### Koanf
 
-Koanf es una biblioteca para leer configuraciones desde diversas fuentes y en diferentes formatos en aplicaciones de Go. Es una alternativa más limpia y ligera a Viper, ofreciendo mejores abstracciones, mayor capacidad de extensión y muchas menos dependencias. 
+[Koanf](https://github.com/knadh/koanf) es una biblioteca para leer configuraciones desde diversas fuentes y en diferentes formatos en aplicaciones de Go. Es una alternativa más limpia y ligera a Viper, ofreciendo mejores abstracciones, mayor capacidad de extensión y muchas menos dependencias. 
 
 ### Cobra
 
-Cobra es una biblioteca que proporciona una interfaz sencilla para crear potentes interfaces de línea de comandos (CLI) modernas, similares a las de herramientas como git y go tools.
+[Cobra](https://github.com/spf13/cobra) es una biblioteca que proporciona una interfaz sencilla para crear potentes interfaces de línea de comandos (CLI) modernas, similares a las de herramientas como git y go tools.
 
 Cobra ofrece:
 
