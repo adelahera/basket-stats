@@ -126,9 +126,9 @@ func existeJugadorEpoca(epoca Epoca, clave Clave) bool {
 
 	_, existe := epoca.estadisticasJugadores[clave]
 	if existe {
-		logger.Info().Msg("El jugador " + clave.nombreApellidos + " existe en la epoca " + strconv.Itoa(epoca.fechaInicio))
+		logger.Debug().Msg("El jugador " + clave.nombreApellidos + " existe en la epoca " + strconv.Itoa(epoca.fechaInicio))
 	} else {
-		logger.Info().Msg("El jugador " + clave.nombreApellidos + " no existe en la epoca " + strconv.Itoa(epoca.fechaInicio))
+		logger.Debug().Msg("El jugador " + clave.nombreApellidos + " no existe en la epoca " + strconv.Itoa(epoca.fechaInicio))
 	}
 	return existe
 }
@@ -137,9 +137,9 @@ func existeEpoca(epocas map[int]Epoca, inicioEpoca int) bool {
 
 	_, existe := epocas[inicioEpoca]
 	if existe {
-		logger.Info().Msg("La epoca " + strconv.Itoa(inicioEpoca) + " existe")
+		logger.Debug().Msg("La epoca " + strconv.Itoa(inicioEpoca) + " existe")
 	} else {
-		logger.Info().Msg("La epoca " + strconv.Itoa(inicioEpoca) + " no existe")
+		logger.Debug().Msg("La epoca " + strconv.Itoa(inicioEpoca) + " no existe")
 	}
 	return existe
 }
