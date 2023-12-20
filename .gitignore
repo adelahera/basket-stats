@@ -17,5 +17,5 @@
 # Go workspace file
 go.work
 
-/logs
+/internal/comparacion_estadistica/logs
 *.env
