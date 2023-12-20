@@ -18,4 +18,5 @@
 go.work
 
 /internal/comparacion_estadistica/logs
+/logs
 *.env
