@@ -485,7 +485,7 @@ func TestNormalizaEpoca(t *testing.T) {
 	}
 	_, err2 := normalizaEpoca(epocaFija, epocaNormalizar, "Puntos")
 	assert.Error(t, err2, "expected error")
-	assert.Contains(t, err2.Error(), "error al normalizar las estadísticas", "unexpected error message")
+	assert.Contains(t, err2.Error(), "la media es 0", "unexpected error message")
 }
 func TestEstadisticaSimilares(t *testing.T) {
 	// Test case 1: Players have similar statistics within the threshold
@@ -493,7 +493,7 @@ func TestEstadisticaSimilares(t *testing.T) {
 	jugador2 := 2600.0
 	umbralPorcentaje := 10.0
 	expected1 := true
-	actual1 := estadisticaSimilares(jugador1, jugador2, umbralPorcentaje)
+	actual1, _ := estadisticaSimilares(jugador1, jugador2, umbralPorcentaje)
 	assert.Equal(t, expected1, actual1, "unexpected result")
 
 	// Test case 2: Players have similar statistics exactly at the threshold
@@ -501,7 +501,7 @@ func TestEstadisticaSimilares(t *testing.T) {
 	jugador2 = 2750.0
 	umbralPorcentaje = 20.0
 	expected2 := true
-	actual2 := estadisticaSimilares(jugador1, jugador2, umbralPorcentaje)
+	actual2, _ := estadisticaSimilares(jugador1, jugador2, umbralPorcentaje)
 	assert.Equal(t, expected2, actual2, "unexpected result")
 
 	// Test case 3: Players have different statistics beyond the threshold
@@ -509,7 +509,7 @@ func TestEstadisticaSimilares(t *testing.T) {
 	jugador2 = 3000.0
 	umbralPorcentaje = 5.0
 	expected3 := false
-	actual3 := estadisticaSimilares(jugador1, jugador2, umbralPorcentaje)
+	actual3, _ := estadisticaSimilares(jugador1, jugador2, umbralPorcentaje)
 	assert.Equal(t, expected3, actual3, "unexpected result")
 }
 func TestComparaJugadores(t *testing.T) {
