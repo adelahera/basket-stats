@@ -8,3 +8,5 @@ CI:
   - appveyor.yml
   - .github/workflows/test_ci.yml
   - .circleci/config.yml
+configuracion:
+  - internal/config/config.go
