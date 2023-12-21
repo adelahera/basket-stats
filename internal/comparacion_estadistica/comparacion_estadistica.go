@@ -33,7 +33,7 @@ func compruebaCampoCSV(line []string, campo string) bool {
 func compruebaTodosCamposCSV(line []string, campos []string) bool {
 	for _, campo := range campos {
 		if !compruebaCampoCSV(line, campo) {
-			logger.Info().Msg("Campo " + campo + " no está en el CSV")
+			logger.Debug().Msg("Campo " + campo + " no está en el CSV")
 			return false
 		}
 	}
@@ -190,7 +190,7 @@ func añadeEstadisticas(lines [][]string) map[int]Epoca {
 		}
 
 		jugador, _ := extraerDatosCSV(lines, j)
-		logger.Info().Msg("Jugador " + jugador.nombreApellidos + " extraido")
+		logger.Debug().Msg("Jugador " + jugador.nombreApellidos + " extraido")
 		clave := Clave{
 			nombreApellidos: jugador.nombreApellidos,
 			temporada:       jugador.temporada,
@@ -225,7 +225,7 @@ func calculaMediaEstadistica(epoca Epoca, estadistica string) float64 {
 		}
 	}
 
-	logger.Info().Msg("Media de " + estadistica + " en la epoca " + strconv.Itoa(epoca.fechaInicio) + " es " + strconv.FormatFloat(suma/float64(len(epoca.estadisticasJugadores)), 'f', 6, 64))
+	logger.Debug().Msg("Media de " + estadistica + " en la epoca " + strconv.Itoa(epoca.fechaInicio) + " es " + strconv.FormatFloat(suma/float64(len(epoca.estadisticasJugadores)), 'f', 6, 64))
 	return suma / float64(len(epoca.estadisticasJugadores))
 }
 
@@ -297,25 +297,25 @@ func normalizaJugador(jugador EstadisticasJugador, porcentaje float64, estadisti
 	switch estadistica {
 	case "Partidos":
 		jugador.partidosJugados = int(float64(jugador.partidosJugados) * porcentaje)
-		logger.Info().Msg("Partidos normalizados a " + strconv.Itoa(jugador.partidosJugados))
+		logger.Debug().Msg("Partidos normalizados a " + strconv.Itoa(jugador.partidosJugados))
 	case "Puntos":
 		jugador.puntos = int(float64(jugador.puntos) * porcentaje)
-		logger.Info().Msg("Puntos normalizados a " + strconv.Itoa(jugador.puntos))
+		logger.Debug().Msg("Puntos normalizados a " + strconv.Itoa(jugador.puntos))
 	case "Asistencias":
 		jugador.asistencias = int(float64(jugador.asistencias) * porcentaje)
-		logger.Info().Msg("Asistencias normalizadas a " + strconv.Itoa(jugador.asistencias))
+		logger.Debug().Msg("Asistencias normalizadas a " + strconv.Itoa(jugador.asistencias))
 	case "Rebotes":
 		jugador.rebotes = int(float64(jugador.rebotes) * porcentaje)
-		logger.Info().Msg("Rebotes normalizados a " + strconv.Itoa(jugador.rebotes))
+		logger.Debug().Msg("Rebotes normalizados a " + strconv.Itoa(jugador.rebotes))
 	case "Tapones":
 		jugador.tapones = int(float64(jugador.tapones) * porcentaje)
-		logger.Info().Msg("Tapones normalizados a " + strconv.Itoa(jugador.tapones))
+		logger.Debug().Msg("Tapones normalizados a " + strconv.Itoa(jugador.tapones))
 	case "Robos":
 		jugador.robos = int(float64(jugador.robos) * porcentaje)
-		logger.Info().Msg("Robos normalizados a " + strconv.Itoa(jugador.robos))
+		logger.Debug().Msg("Robos normalizados a " + strconv.Itoa(jugador.robos))
 	case "Perdidas":
 		jugador.perdidas = int(float64(jugador.perdidas) * porcentaje)
-		logger.Info().Msg("Perdidas normalizadas a " + strconv.Itoa(jugador.perdidas))
+		logger.Debug().Msg("Perdidas normalizadas a " + strconv.Itoa(jugador.perdidas))
 	}
 
 	return jugador
@@ -404,7 +404,7 @@ func comparaJugadores(epocaFija Epoca, epocaNormalizada Epoca, estadistica strin
 					logger.Error().Msg("Error al calcular la variación de las estadísticas:" + err.Error())
 					return nil, err
 				}
-				logger.Info().Msg("Jugador " + jugadorNormalizado.nombreApellidos + " es similar a " + jugadorFijo.nombreApellidos)
+				logger.Debug().Msg("Jugador " + jugadorNormalizado.nombreApellidos + " es similar a " + jugadorFijo.nombreApellidos)
 				similares = append(similares, claveFijo)
 				comparador[claveNormalizado] = similares
 			}
