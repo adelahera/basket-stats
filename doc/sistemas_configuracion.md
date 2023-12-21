@@ -18,21 +18,13 @@ Una biblioteca de configuración simplifica el proceso de trabajar con configura
 
 [Koanf](https://github.com/knadh/koanf) es una biblioteca para leer configuraciones desde diversas fuentes y en diferentes formatos en aplicaciones de Go. Es una alternativa más limpia y ligera a Viper, ofreciendo mejores abstracciones, mayor capacidad de extensión y muchas menos dependencias. 
 
-### Cobra
+### Envconfig
 
-[Cobra](https://github.com/spf13/cobra) es una biblioteca que proporciona una interfaz sencilla para crear potentes interfaces de línea de comandos (CLI) modernas, similares a las de herramientas como git y go tools.
+[Envconfig](https://github.com/kelseyhightower/envconfig) es una biblioteca que simplifica la lectura de configuraciones desde variables de entorno en Go. Permite definir una estructura de configuración con tags de estructura para especificar cómo se deben leer las variables de entorno. La parte mala es que lleva un año sin actualización también, por lo que su puntuación en Snyk es bastante baja precisamente por esto, a pesar de que parece ser una biblioteca bastante fiable y utilizada.
 
-Cobra ofrece:
+### Confita
 
-- Creación fácil de CLIs basados en subcomandos: app server, app fetch, etc.
-- Flags totalmente compatibles con POSIX 
-- Flags globales, locales y cascading 
-- Generación automática de ayuda para comandos y flags
-- Reconocimiento automático de flags de ayuda como -h, --help, etc.
-- Autocompletado de shell generado automáticamente para la aplicación (bash, zsh, fish, powershell)
-- Páginas de manual generadas automáticamente para la aplicación
-- Alias de comandos para poder cambiar cosas sin romperlas
-- Integración opcional y sin problemas con Viper.
+[Confita](https://github.com/heetch/confita) es una biblioteca bastante simple que carga la configuración y la almacena en un struct. No implementa nignguna funcionalidad a parte de esta, (como sí lo hacía Cobra, por ejemplo) por lo que puede ser buena opción si no queremos complicarnos. Por lo que he visto de Confita era bastante utilizada hace un tiempo, pero por algún motivo dejaron de actualizarla hace un año.
 
 ## Decisión
 
@@ -40,10 +32,9 @@ Cobra ofrece:
 |------------------|------|-------|----------|
 | Viper            | 89   | 2.000 | 24.700   |
 | Koanf            | 82   | 141   | 2.100    |
-| Cobra            | 91   | 2.800 | 34.500   |
+| Confita          | 55   | 50    | 481      |
+| Envconfig        | 65   | 374   | 4700     |
 
-A pesar de que `Cobra` tenga más puntuación y reputación que las otras dos, su objetivo es crear interfaces CLI, que no es necesario en nuestro caso. Puede integrarse con `Viper` para brindarle soporte para crear configuraciones para sistemas distribuidos, que es lo que buscamos. Como a fin de cuentas, `Cobra` utiliza `Viper` para esto, nuestra elección va a ser esta última, pues el resto de funcionalidades que implementa `Cobra` no las necesitamos.
-
-`Koanf`, como podemos observar se queda un poco atrás respecto a `Viper`.
+Viendo las puntuaciones de las distintas opciones estudiadas, se ve claramente que `Viper` es la opción que más se ajusta a los criterios. El resto de opciones, sobre todo `Koanf`, parecen ser muy buenas opciones, pero el hecho de que muchas de ellas llevan casi un año sin actualizarse, dejan a `Viper` como primera candidata.
 
 Elección final: `Viper`
