@@ -126,9 +126,9 @@ func existeJugadorEpoca(epoca Epoca, clave Clave) bool {
 
 	_, existe := epoca.estadisticasJugadores[clave]
 	if existe {
-		logger.Debug().Msg("El jugador " + clave.nombreApellidos + " existe en la epoca " + strconv.Itoa(epoca.fechaInicio))
+		logger.Debug().Msgf("El jugador %s  existe en la epoca %d", clave.nombreApellidos, epoca.fechaInicio)
 	} else {
-		logger.Debug().Msg("El jugador " + clave.nombreApellidos + " no existe en la epoca " + strconv.Itoa(epoca.fechaInicio))
+		logger.Debug().Msgf("El jugador %s  no existe en la epoca %d", clave.nombreApellidos, epoca.fechaInicio)
 	}
 	return existe
 }
@@ -137,22 +137,22 @@ func existeEpoca(epocas map[int]Epoca, inicioEpoca int) bool {
 
 	_, existe := epocas[inicioEpoca]
 	if existe {
-		logger.Debug().Msg("La epoca " + strconv.Itoa(inicioEpoca) + " existe")
+		logger.Debug().Msgf("La epoca %d exite", inicioEpoca)
 	} else {
-		logger.Debug().Msg("La epoca " + strconv.Itoa(inicioEpoca) + " no existe")
+		logger.Debug().Msgf("La epoca %d no existe", inicioEpoca)
 	}
 	return existe
 }
 
 func obtenerAñoInicioEpoca(temporada int) int {
 
-	logger.Info().Msg("Obteniendo año de inicio de la epoca " + strconv.Itoa(temporada))
+	logger.Info().Msgf("Obteniendo año de inicio de la epoca %d", temporada)
 	return (temporada / 10) * 10
 }
 
 func crearNuevaEpoca(inicioEpoca int) Epoca {
 
-	logger.Info().Msg("Creando nueva epoca " + strconv.Itoa(inicioEpoca))
+	logger.Info().Msgf("Creando nueva epoca %d", inicioEpoca)
 	epoca := Epoca{
 		fechaInicio:           inicioEpoca,
 		fechaFin:              inicioEpoca + 9,
@@ -164,7 +164,7 @@ func crearNuevaEpoca(inicioEpoca int) Epoca {
 
 func añadeJugadorEpoca(epocas map[int]Epoca, clave Clave, jugador EstadisticasJugador) {
 
-	logger.Info().Msg("Añadiendo jugador " + clave.nombreApellidos + " a la epoca " + strconv.Itoa(jugador.temporada))
+	logger.Info().Msgf("Añadiendo jugador %s a la epoca %d", clave.nombreApellidos, jugador.temporada)
 	inicioEpoca := obtenerAñoInicioEpoca(jugador.temporada)
 
 	if existeEpoca(epocas, inicioEpoca) {
@@ -204,7 +204,7 @@ func añadeEstadisticas(lines [][]string) map[int]Epoca {
 
 func calculaMediaEstadistica(epoca Epoca, estadistica string) float64 {
 
-	logger.Info().Msg("Calculando media de " + estadistica + " en la epoca " + strconv.Itoa(epoca.fechaInicio))
+	logger.Info().Msgf("Calculando media de %s en la epoca %d", estadistica, epoca.fechaInicio)
 	var suma float64
 	for _, jugador := range epoca.estadisticasJugadores {
 		switch estadistica {
@@ -225,13 +225,13 @@ func calculaMediaEstadistica(epoca Epoca, estadistica string) float64 {
 		}
 	}
 
-	logger.Debug().Msg("Media de " + estadistica + " en la epoca " + strconv.Itoa(epoca.fechaInicio) + " es " + strconv.FormatFloat(suma/float64(len(epoca.estadisticasJugadores)), 'f', 6, 64))
+	logger.Debug().Msgf("Media de %s en la epoca %d es %f", estadistica, epoca.fechaInicio, suma/float64(len(epoca.estadisticasJugadores)))
 	return suma / float64(len(epoca.estadisticasJugadores))
 }
 
 func calculaMediaJugadorEpoca(epoca Epoca, jugador Clave, estadistica string) (float64, error) {
 
-	logger.Info().Msg("Calculando media de " + estadistica + " de " + jugador.nombreApellidos + " en la epoca " + strconv.Itoa(jugador.temporada))
+	logger.Info().Msgf("Calculando media de %s de %s en la epoca %d", estadistica, jugador.nombreApellidos, epoca.fechaInicio)
 	var total float64
 	var totalPartidos float64
 
@@ -286,7 +286,7 @@ func calculaMediaJugadorEpoca(epoca Epoca, jugador Clave, estadistica string) (f
 		}
 	}
 
-	logger.Info().Msg("Media de " + estadistica + " de " + jugador.nombreApellidos + " en la epoca " + strconv.Itoa(jugador.temporada) + " es " + strconv.FormatFloat(total/totalPartidos, 'f', 6, 64))
+	logger.Debug().Msgf("Media de %s de %s en la epoca %d es %f", estadistica, jugador.nombreApellidos, epoca.fechaInicio, total/totalPartidos)
 	return total / totalPartidos, nil
 
 }
@@ -297,25 +297,25 @@ func normalizaJugador(jugador EstadisticasJugador, porcentaje float64, estadisti
 	switch estadistica {
 	case "Partidos":
 		jugador.partidosJugados = int(float64(jugador.partidosJugados) * porcentaje)
-		logger.Debug().Msg("Partidos normalizados a " + strconv.Itoa(jugador.partidosJugados))
+		logger.Debug().Msgf("Partidos normalizados a %d", jugador.partidosJugados)
 	case "Puntos":
 		jugador.puntos = int(float64(jugador.puntos) * porcentaje)
-		logger.Debug().Msg("Puntos normalizados a " + strconv.Itoa(jugador.puntos))
+		logger.Debug().Msgf("Puntos normalizados a %d", jugador.puntos)
 	case "Asistencias":
 		jugador.asistencias = int(float64(jugador.asistencias) * porcentaje)
-		logger.Debug().Msg("Asistencias normalizadas a " + strconv.Itoa(jugador.asistencias))
+		logger.Debug().Msgf("Asistencias normalizadas a %d", jugador.asistencias)
 	case "Rebotes":
 		jugador.rebotes = int(float64(jugador.rebotes) * porcentaje)
-		logger.Debug().Msg("Rebotes normalizados a " + strconv.Itoa(jugador.rebotes))
+		logger.Debug().Msgf("Rebotes normalizados a %d", jugador.rebotes)
 	case "Tapones":
 		jugador.tapones = int(float64(jugador.tapones) * porcentaje)
-		logger.Debug().Msg("Tapones normalizados a " + strconv.Itoa(jugador.tapones))
+		logger.Debug().Msgf("Tapones normalizados a %d", jugador.tapones)
 	case "Robos":
 		jugador.robos = int(float64(jugador.robos) * porcentaje)
-		logger.Debug().Msg("Robos normalizados a " + strconv.Itoa(jugador.robos))
+		logger.Debug().Msgf("Robos normalizados a %d", jugador.robos)
 	case "Perdidas":
 		jugador.perdidas = int(float64(jugador.perdidas) * porcentaje)
-		logger.Debug().Msg("Perdidas normalizadas a " + strconv.Itoa(jugador.perdidas))
+		logger.Debug().Msgf("Perdidas normalizadas a %d", jugador.perdidas)
 	}
 
 	return jugador
@@ -323,7 +323,7 @@ func normalizaJugador(jugador EstadisticasJugador, porcentaje float64, estadisti
 
 func normalizaEpoca(epocaFija Epoca, epocaNormalizar Epoca, estadistica string) (Epoca, error) {
 
-	logger.Info().Msg("Normalizando epoca " + strconv.Itoa(epocaNormalizar.fechaInicio) + " respecto a la epoca " + strconv.Itoa(epocaFija.fechaInicio))
+	logger.Info().Msgf("Normalizando epoca %d respecto a la epoca %d", epocaNormalizar.fechaInicio, epocaFija.fechaInicio)
 	mediaEpocaFija := calculaMediaEstadistica(epocaFija, estadistica)
 	mediaEpocaNormalizar := calculaMediaEstadistica(epocaNormalizar, estadistica)
 
@@ -367,7 +367,7 @@ func estadisticaSimilares(jugador1 float64, jugador2 float64, umbralPorcentaje f
 
 func comparaJugadores(epocaFija Epoca, epocaNormalizada Epoca, estadistica string, umbral float64) (map[Clave][]Clave, error) {
 
-	logger.Info().Msg("Comparando jugadores de la epoca " + strconv.Itoa(epocaNormalizada.fechaInicio) + " respecto a la epoca " + strconv.Itoa(epocaFija.fechaInicio))
+	logger.Info().Msgf("Comparando jugadores de la epoca %d con la epoca %d", epocaNormalizada.fechaInicio, epocaFija.fechaInicio)
 	epocaNormalizada, err := normalizaEpoca(epocaFija, epocaNormalizada, estadistica)
 	if err != nil {
 		logger.Error().Msg("Error al normalizar las estadísticas:" + err.Error())
