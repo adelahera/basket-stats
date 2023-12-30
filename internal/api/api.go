@@ -37,25 +37,25 @@ func setRoutes() {
 }
 
 func getEstadisticas(c *fiber.Ctx) error {
-	// ...
+	return c.SendString("Hello, World 👋!")
 }
 
 func getSimilares(c *fiber.Ctx) error {
-	// ...
+	return c.SendString("Hello, World 👋!")
 }
 
 func deleteJugador(c *fiber.Ctx) error {
-	// ...
+	return c.SendString("Hello, World 👋!")
 }
 
 func addJugador(c *fiber.Ctx) error {
-	// ...
+	return c.SendString("Hello, World 👋!")
 }
 
 func updateJugador(c *fiber.Ctx) error {
-	// ...
+	return c.SendString("Hello, World 👋!")
 }
 
 func deleteEpoca(c *fiber.Ctx) error {
-	// ...
+	return c.SendString("Hello, World 👋!")
 }
