@@ -17,19 +17,19 @@ func SetupApi() *fiber.App {
 func setRoutes() {
 
 	// Devuelve las estadísticas de un jugador
-	app.Get("/estadisticas/:temporada/:nombre", getEstadisticas)
+	app.Get("/estadisticas/:nombre/:temporada", getEstadisticas)
 
 	// Actualiza las estadisticas de un jugador
-	app.Put("/estadisticas/:temporada/:nombre", updateEstadisticas)
+	app.Put("/estadisticas/:nombre/:temporada", updateEstadisticas)
 
 	// Borra las estadísticas de un jugador en una temporada
-	app.Delete("/estadisticas/:temporada/:nombre", deleteEstadisticas)
+	app.Delete("/estadisticas/:nombre/:temporada", deleteEstadisticas)
 
 	// Devuelve los jugadores similares de una epoca a otro en base a una estadística y un umbral de similitud
-	app.Get("/jugador/:temporada:/:nombre/:estadistica/:similitud/:epoca", getSimilares)
+	app.Get("/jugador/:nombre:/:temporada/:estadistica/:similitud/:epoca", getSimilares)
 
 	// Borra un jugador de una temporada concreta
-	app.Delete("/jugador/:temporada/:nombre", deleteJugadorTemporada)
+	app.Delete("/jugador/:nombre/:temporada", deleteJugadorTemporada)
 
 	// Borra todos los datos en todas las temporadas de un jugador
 	app.Delete("/jugador/:nombre", deleteJugador)
@@ -38,7 +38,7 @@ func setRoutes() {
 	app.Post("/jugador", addJugador)
 
 	// Actualiza los datos de un jugador
-	app.Put("/jugador/:temporada/:nombre", updateJugador)
+	app.Put("/jugador/:nombre/:temporada", updateJugador)
 
 }
 
