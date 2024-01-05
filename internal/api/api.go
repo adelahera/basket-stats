@@ -22,9 +22,6 @@ func setRoutes() {
 	// Actualiza las estadisticas de un jugador
 	app.Put("/estadisticas/:nombre/:temporada", updateEstadisticas)
 
-	// Borra las estadísticas de un jugador en una temporada
-	app.Delete("/estadisticas/:nombre/:temporada", deleteEstadisticas)
-
 	// Devuelve los jugadores similares de una epoca a otro en base a una estadística y un umbral de similitud
 	app.Get("/jugador/:nombre:/:temporada/:estadistica/:similitud/:epoca", getSimilares)
 
@@ -47,10 +44,6 @@ func getEstadisticas(c *fiber.Ctx) error {
 }
 
 func getSimilares(c *fiber.Ctx) error {
-	return c.SendString("Hello, World 👋!")
-}
-
-func deleteEstadisticas(c *fiber.Ctx) error {
 	return c.SendString("Hello, World 👋!")
 }
 
