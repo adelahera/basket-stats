@@ -32,10 +32,10 @@ func setRoutes() {
 	app.Delete("/jugador/:nombre", deleteJugador)
 
 	// Crea un nuevo jugador
-	app.Post("/jugador", addJugador)
+	app.Put("/jugador/:nombre/:temporada", addJugador)
 
 	// Actualiza los datos de un jugador
-	app.Put("/jugador/:nombre/:temporada", updateJugador)
+	app.Patch("/jugador/:nombre/:temporada", updateJugador)
 
 }
 
