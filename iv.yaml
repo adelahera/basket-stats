@@ -10,3 +10,5 @@ CI:
   - .circleci/config.yml
 configuracion:
   - internal/config/config.go
+framework:
+  - fiber
